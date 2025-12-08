@@ -291,11 +291,17 @@
 <body class="h-full bg-gradient-to-br from-blue-50 via-white to-cyan-50 font-sans">
   <!-- Notification -->
   <div id="notification" class="notification bg-white border-l-4 border-green-500 p-4 rounded-lg shadow-lg">
-    <div class="flex items-center"><span class="text-green-500 text-xl mr-3">✓</span> <span id="notificationText" class="text-gray-800"></span>
+    <div class="flex items-center">
+      <svg class="w-6 h-6 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg><span id="notificationText" class="text-gray-800"></span>
     </div>
   </div><!-- Auto Save Indicator -->
   <div id="autoSaveIndicator" class="auto-save-indicator bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
-    <div class="flex items-center text-sm"><span class="mr-2">💾</span> <span>Data disimpan otomatis</span>
+    <div class="flex items-center text-sm">
+      <svg class="w-5 h-5 mr-2" fill="currentColor" viewbox="0 0 20 20">
+        <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z"></path>
+      </svg><span>Data disimpan otomatis</span>
     </div>
   </div><!-- Overlay -->
   <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div><!-- Sidebar -->
@@ -303,41 +309,74 @@
     <!-- Header - Fixed -->
     <div class="flex-shrink-0 p-6 border-b border-gray-200">
       <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-xl font-bold text-gray-800">📚 Menu Navigasi</h2>
-          <p class="text-sm text-gray-500">Kelola data dengan mudah</p>
-        </div><button id="closeSidebar" class="text-gray-500 hover:text-gray-700 text-3xl transition-colors">×</button>
+        <div class="flex items-center gap-2">
+          <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewbox="0 0 20 20">
+            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+          </svg>
+          <div>
+            <h2 class="text-xl font-bold text-gray-800">Menu Navigasi</h2>
+            <p class="text-sm text-gray-500">Kelola data dengan mudah</p>
+          </div>
+        </div><button id="closeSidebar" class="text-gray-500 hover:text-gray-700 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg></button>
       </div>
     </div><!-- Menu - Scrollable -->
-    <nav class="flex-1 overflow-y-auto p-6 space-y-3"><a href="#" onclick="showSection('dashboard')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🏠</span>
+    <nav class="flex-1 overflow-y-auto p-6 space-y-3"><a href="#" onclick="showSection('dashboard')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+        </svg>
         <div><span class="font-medium">Dashboard</span>
           <p class="text-xs text-gray-500">Halaman utama</p>
         </div>
-      </a> <a href="#" onclick="showSection('kelas')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🏫</span>
+      </a> <a href="#" onclick="showSection('kelas')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+          <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+        </svg>
         <div><span class="font-medium">Data Kelas</span>
           <p class="text-xs text-gray-500">Kelola kelas sekolah</p>
         </div>
-      </a> <a href="#" onclick="showSection('siswa')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">👨‍🎓</span>
+      </a> <a href="#" onclick="showSection('siswa')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+        </svg>
         <div><span class="font-medium">Data Siswa</span>
           <p class="text-xs text-gray-500">Kelola data siswa</p>
         </div>
-      </a> <a href="#" onclick="showSection('nilai')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">📊</span>
+      </a> <a href="#" onclick="showSection('nilai')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+        </svg>
         <div><span class="font-medium">Nilai Siswa</span>
           <p class="text-xs text-gray-500">Input dan kelola nilai</p>
         </div>
-      </a> <a href="#" onclick="showSection('dashboard')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🏆</span>
+      </a> <a href="#" onclick="showSection('dashboard')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+        </svg>
         <div><span class="font-medium">Ranking Siswa</span>
           <p class="text-xs text-gray-500">Lihat peringkat nilai</p>
         </div>
-      </a> <a href="#" onclick="showSection('pencarian')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🔎</span>
+      </a> <a href="#" onclick="showSection('pencarian')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+        </svg>
         <div><span class="font-medium">Filter Nilai</span>
           <p class="text-xs text-gray-500">Cari dan filter nilai</p>
         </div>
-      </a> <a href="#" onclick="showSection('ekspor')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">📥</span>
+      </a> <a href="#" onclick="showSection('ekspor')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+        </svg>
         <div><span class="font-medium">Ekspor Data</span>
           <p class="text-xs text-gray-500">Unduh laporan nilai</p>
         </div>
-      </a> <a href="#" onclick="resetAllData()" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-red-50 text-gray-700 hover:text-red-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">♻</span>
+      </a> <a href="#" onclick="resetAllData()" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-red-50 text-gray-700 hover:text-red-600 group">
+        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewbox="0 0 20 20">
+          <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+        </svg>
         <div><span class="font-medium">Reset Data</span>
           <p class="text-xs text-gray-500">Hapus semua data</p>
         </div>
@@ -345,15 +384,24 @@
     </nav><!-- Footer - Fixed -->
     <div class="flex-shrink-0 p-6 border-t border-gray-200">
       <div class="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-200">
-        <h3 class="font-semibold text-blue-900 mb-2">💾 Penyimpanan</h3>
+        <h3 class="font-semibold text-blue-900 mb-2">
+          <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+            <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z"></path>
+          </svg> Penyimpanan
+        </h3>
         <p class="text-sm text-blue-700">Data tersimpan otomatis di browser Anda dan tidak akan hilang saat refresh!</p>
       </div>
     </div>
-  </div><!-- Detail Panel -->
+  </div><!-- Detail Panel Overlay -->
+  <div id="detailOverlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40" onclick="closeDetailPanel()"></div><!-- Detail Panel -->
   <div id="detailPanel" class="detail-panel fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50 overflow-y-auto">
     <div class="p-6">
       <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-bold text-gray-900">👤 Detail Nilai Siswa</h3><button onclick="closeDetailPanel()" class="text-gray-500 hover:text-gray-700 text-2xl transition-colors">❌</button>
+        <h3 class="text-xl font-bold text-gray-900">
+          <svg class="w-6 h-6 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+          </svg> Detail Nilai Siswa
+        </h3><button onclick="closeDetailPanel()" class="text-gray-500 hover:text-gray-700 text-2xl transition-colors">×</button>
       </div>
       <div id="detailContent">
         <!-- Detail content will be populated here -->
@@ -365,9 +413,16 @@
     <header class="bg-white/90 backdrop-blur-sm shadow-sm border-b border-gray-200 sticky top-0 z-30">
       <div class="px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <div class="flex items-center space-x-4"><button id="menuToggle" class="text-gray-600 hover:text-blue-600 text-2xl transition-colors hover:scale-110">☰</button>
+          <div class="flex items-center space-x-4"><button id="menuToggle" class="text-gray-600 hover:text-blue-600 text-2xl transition-colors hover:scale-110">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg></button>
             <div>
-              <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">📚 Daftar Nilai Kelas Digital</h1>
+              <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent flex items-center gap-2">
+                <svg class="w-7 h-7 text-blue-600" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                </svg> Daftar Nilai Kelas Digital
+              </h1>
               <p class="text-sm text-gray-500 hidden sm:block">Kelola nilai siswa dengan mudah, cepat, dan efisien</p>
             </div>
           </div>
@@ -383,7 +438,11 @@
       <!-- Dashboard Section -->
       <div id="dashboardSection" class="section fade-in">
         <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-gray-900 mb-4">📚 Daftar Nilai Kelas Digital</h2>
+          <h2 class="text-4xl font-bold text-gray-900 mb-4">
+            <svg class="w-10 h-10 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+            </svg> Daftar Nilai Kelas Digital
+          </h2>
           <p class="text-xl text-gray-600 mb-8">Kelola nilai siswa dengan mudah, cepat, dan efisien</p><!-- Quick Stats -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
@@ -391,7 +450,10 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                🏫 Total Kelas
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                  <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"></path>
+                </svg> Total Kelas
               </div>
             </div>
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
@@ -399,7 +461,9 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                👨‍🎓 Total Siswa
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                </svg> Total Siswa
               </div>
             </div>
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
@@ -407,7 +471,10 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                📝 Total Nilai
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                  <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                </svg> Total Nilai
               </div>
             </div>
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
@@ -415,7 +482,9 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                🎯 Rata-rata
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+                </svg> Rata-rata
               </div>
             </div>
           </div>
@@ -423,7 +492,11 @@
         <div class="mb-8">
           <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
             <div>
-              <h3 class="text-2xl font-bold text-gray-900">🏆 Peringkat Siswa</h3>
+              <h3 class="text-2xl font-bold text-gray-900">
+                <svg class="w-8 h-8 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg> Peringkat Siswa
+              </h3>
               <p class="text-gray-600">Urutan berdasarkan rata-rata nilai tertinggi</p>
             </div>
             <div class="flex gap-3 mt-4 sm:mt-0"><select id="rankingKelasFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm" onchange="renderDashboard()">
@@ -444,7 +517,9 @@
           <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-2xl border border-blue-200">
             <div class="text-center">
               <div class="text-4xl mb-4">
-                🏫
+                <svg class="w-16 h-16 mx-auto text-blue-600" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-blue-900 mb-2">Kelola Kelas</h3>
               <p class="text-blue-700 text-sm mb-4">Tambah dan atur kelas sekolah</p><button onclick="showSection('kelas')" class="btn-primary text-white px-6 py-2 rounded-xl font-medium w-full"> Buka Kelas </button>
@@ -453,7 +528,9 @@
           <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl border border-green-200">
             <div class="text-center">
               <div class="text-4xl mb-4">
-                👨‍🏫
+                <svg class="w-16 h-16 mx-auto text-green-600" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-green-900 mb-2">Data Siswa</h3>
               <p class="text-green-700 text-sm mb-4">Kelola informasi siswa</p><button onclick="showSection('siswa')" class="btn-success text-white px-6 py-2 rounded-xl font-medium w-full"> Buka Siswa </button>
@@ -462,7 +539,9 @@
           <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-2xl border border-purple-200">
             <div class="text-center">
               <div class="text-4xl mb-4">
-                📊
+                <svg class="w-16 h-16 mx-auto text-purple-600" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+                </svg>
               </div>
               <h3 class="text-lg font-semibold text-purple-900 mb-2">Input Nilai</h3>
               <p class="text-purple-700 text-sm mb-4">Masukkan dan kelola nilai</p><button onclick="showSection('nilai')" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-2 rounded-xl font-medium w-full transition-all"> Buka Nilai </button>
@@ -471,7 +550,11 @@
         </div><!-- Ranking Table -->
         <div class="table-container">
           <div class="p-6 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900">📋 Daftar Peringkat Lengkap</h3>
+            <h3 class="text-lg font-semibold text-gray-900">
+              <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+              </svg> Daftar Peringkat Lengkap
+            </h3>
             <p class="text-gray-600 text-sm">Urutan siswa berdasarkan nilai rata-rata tertinggi ke terendah</p>
           </div>
           <div class="overflow-x-auto">
@@ -497,9 +580,13 @@
       <div id="kelasSection" class="section hidden">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">🏫 Manajemen Kelas</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">
+              <svg class="w-8 h-8 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+              </svg> Manajemen Kelas
+            </h2>
             <p class="text-gray-600">Kelola data kelas sekolah dengan mudah</p>
-          </div><button onclick="openModal('kelasModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg mt-4 sm:mt-0"> ➕ Tambah Kelas Baru </button>
+          </div><button onclick="openModal('kelasModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg mt-4 sm:mt-0"> ��� Tambah Kelas Baru </button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="kelasContainer">
           <!-- Kelas cards will be populated here -->
@@ -508,7 +595,11 @@
       <div id="siswaSection" class="section hidden">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">👨‍🏫 Data Siswa</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">
+              <svg class="w-8 h-8 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+                <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+              </svg> Data Siswa
+            </h2>
             <p class="text-gray-600">Kelola informasi siswa di setiap kelas</p>
           </div>
           <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0"><select id="kelasFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
@@ -537,7 +628,11 @@
       <div id="nilaiSection" class="section hidden">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
-            <h2 class="text-3xl font-bold text-gray-900 mb-2">📊 Nilai Siswa</h2>
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">
+              <svg class="w-8 h-8 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+              </svg> Nilai Siswa
+            </h2>
             <p class="text-gray-600">Input dan kelola nilai dengan sistem perhitungan otomatis</p>
           </div>
           <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0"><select id="kelasNilaiFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
@@ -561,11 +656,19 @@
       </div><!-- Pencarian Section -->
       <div id="pencarianSection" class="section hidden">
         <div class="mb-8">
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">🔎 Filter &amp; Pencarian Nilai</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-2">
+            <svg class="w-8 h-8 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+            </svg> Filter &amp; Pencarian Nilai
+          </h2>
           <p class="text-gray-600">Cari dan filter data nilai berdasarkan kriteria tertentu</p>
         </div><!-- Filter Form -->
         <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 mb-8">
-          <h3 class="text-lg font-semibold text-gray-900 mb-6">🔍 Filter Data</h3>
+          <h3 class="text-lg font-semibold text-gray-900 mb-6">
+            <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+              <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+            </svg> Filter Data
+          </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div><label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Mulai</label> <input type="date" id="tanggalMulai" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
             </div>
@@ -588,7 +691,11 @@
         <div id="filterResults" class="hidden">
           <div class="table-container">
             <div class="p-6 border-b border-gray-200">
-              <h3 class="text-lg font-semibold text-gray-900">📋 Hasil Pencarian</h3>
+              <h3 class="text-lg font-semibold text-gray-900">
+                <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg> Hasil Pencarian
+              </h3>
               <p class="text-gray-600 text-sm">Satu baris per siswa - klik Detail untuk melihat nilai lengkap</p>
             </div>
             <div class="overflow-x-auto">
@@ -612,13 +719,19 @@
       </div><!-- Ekspor Section -->
       <div id="eksporSection" class="section hidden">
         <div class="mb-8">
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">📤 Ekspor &amp; Laporan Nilai</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-2">
+            <svg class="w-8 h-8 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg> Ekspor &amp; Laporan Nilai
+          </h2>
           <p class="text-gray-600">Unduh laporan nilai dalam berbagai format</p>
         </div><!-- Export Ranking Form -->
         <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
           <div class="text-center mb-6">
             <div class="text-5xl mb-3">
-              🏆
+              <svg class="w-20 h-20 mx-auto text-yellow-500" fill="currentColor" viewbox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
             </div>
             <h3 class="text-2xl font-bold text-gray-900 mb-2">Export Ranking Siswa</h3>
             <p class="text-gray-600">Unduh daftar peringkat siswa dengan filter kustom</p>
@@ -645,19 +758,21 @@
               </div>
             </div>
           </div>
-          <div class="flex gap-4"><button onclick="exportRankingExcel()" class="flex-1 btn-primary text-white px-8 py-4 rounded-xl font-medium shadow-lg"> 📊 Export ke Excel </button> <button onclick="exportRankingCSV()" class="flex-1 btn-success text-white px-8 py-4 rounded-xl font-medium shadow-lg"> 📋 Export ke CSV </button>
+          <div class="flex gap-4"><button onclick="exportRankingExcel()" class="flex-1 btn-primary text-white px-8 py-4 rounded-xl font-medium shadow-lg"> 📊 Export ke Excel </button> <button onclick="exportRankingCSV()" class="flex-1 btn-success text-white px-8 py-4 rounded-xl font-medium shadow-lg"> �� Export ke CSV </button>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
             <div class="text-center">
               <div class="text-6xl mb-4">
-                📊
+                <svg class="w-24 h-24 mx-auto text-blue-600" fill="currentColor" viewbox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg>
               </div>
               <h3 class="text-xl font-semibold text-blue-900 mb-4">Ekspor Lengkap (Excel)</h3>
               <p class="text-blue-700 mb-6">Unduh laporan lengkap dengan sheet terpisah per kelas, format otomatis rapi, dan rekap keseluruhan</p>
               <div class="text-sm text-blue-600 mb-4">
-                ✅ Sheet per kelas<br>
+                ��� Sheet per kelas<br>
                 ✅ Format tabel otomatis<br>
                 ✅ Rekap keseluruhan<br>
                 ✅ Color coding nilai
@@ -667,7 +782,9 @@
           <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl border border-green-200">
             <div class="text-center">
               <div class="text-6xl mb-4">
-                📋
+                <svg class="w-24 h-24 mx-auto text-green-600" fill="currentColor" viewbox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                </svg>
               </div>
               <h3 class="text-xl font-semibold text-green-900 mb-4">Ekspor Semua Nilai (CSV)</h3>
               <p class="text-green-700 mb-6">Unduh semua data nilai dalam format CSV untuk Google Sheets dan aplikasi lainnya</p><button onclick="eksporCSV()" class="btn-success text-white px-8 py-4 rounded-xl font-medium shadow-lg w-full"> 📥 Download CSV Lengkap </button>
@@ -675,14 +792,20 @@
           </div>
         </div><!-- Statistics -->
         <div class="stats-card p-8 rounded-2xl">
-          <h4 class="text-xl font-semibold text-gray-900 mb-6 text-center">📊 Ringkasan Data Sekolah</h4>
+          <h4 class="text-xl font-semibold text-gray-900 mb-6 text-center">
+            <svg class="w-6 h-6 inline-block mr-2" fill="currentColor" viewbox="0 0 20 20">
+              <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+            </svg> Ringkasan Data Sekolah
+          </h4>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="text-center">
               <div class="text-4xl font-bold text-blue-600 mb-2" id="totalKelas">
                 0
               </div>
               <div class="text-sm text-gray-600">
-                🏫 Total Kelas
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                </svg> Total Kelas
               </div>
             </div>
             <div class="text-center">
@@ -690,7 +813,9 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                👨‍🏫 Total Siswa
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                </svg> Total Siswa
               </div>
             </div>
             <div class="text-center">
@@ -698,7 +823,10 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                📝 Total Nilai
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                  <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                </svg> Total Nilai
               </div>
             </div>
             <div class="text-center">
@@ -706,7 +834,9 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                🎯 Rata-rata
+                <svg class="w-5 h-5 inline-block mr-1" fill="currentColor" viewbox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"></path>
+                </svg> Rata-rata
               </div>
             </div>
           </div>
@@ -724,7 +854,9 @@
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
       <div class="text-center mb-6">
         <div class="text-5xl mb-4">
-          🏫
+          <svg class="w-20 h-20 mx-auto text-blue-600" fill="currentColor" viewbox="0 0 20 20">
+            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+          </svg>
         </div>
         <h3 class="text-2xl font-bold text-gray-900" id="kelasModalTitle">Tambah Kelas Baru</h3>
         <p class="text-gray-600">Masukkan informasi kelas</p>
@@ -755,7 +887,9 @@
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
       <div class="text-center mb-6">
         <div class="text-5xl mb-4">
-          👨‍🏫
+          <svg class="w-20 h-20 mx-auto text-green-600" fill="currentColor" viewbox="0 0 20 20">
+            <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+          </svg>
         </div>
         <h3 class="text-2xl font-bold text-gray-900" id="siswaModalTitle">Tambah Siswa Baru</h3>
         <p class="text-gray-600">Masukkan data siswa</p>
@@ -774,7 +908,7 @@
             </select>
           </div>
         </div>
-        <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('siswaModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" class="btn-primary flex-1 text-white px-6 py-3 rounded-xl font-medium"> ➕ Simpan Siswa </button>
+        <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('siswaModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" class="btn-primary flex-1 text-white px-6 py-3 rounded-xl font-medium"> ✨ Simpan Siswa </button>
         </div>
       </form>
     </div>
@@ -783,22 +917,24 @@
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
       <div class="text-center mb-6">
         <div class="text-5xl mb-4">
-          📊
+          <svg class="w-20 h-20 mx-auto text-purple-600" fill="currentColor" viewbox="0 0 20 20">
+            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+          </svg>
         </div>
-        <h3 class="text-2xl font-bold text-gray-900">Tambah Kolom Nilai</h3>
+        <h3 class="text-2xl font-bold text-gray-900" id="kolomModalTitle">Tambah Kolom Nilai</h3>
         <p class="text-gray-600">Buat jenis penilaian baru</p>
       </div><!-- Progress Bar -->
       <div class="form-progress mb-6">
         <div class="form-progress-bar" id="kolomProgress" style="width: 0%"></div>
       </div>
-      <form id="kolomForm" onsubmit="submitKolom(event)">
+      <form id="kolomForm" onsubmit="submitKolom(event)"><input type="hidden" id="oldKolomNama" value="">
         <div class="space-y-6">
           <div><label class="block text-sm font-medium text-gray-700 mb-2">📝 Nama Jenis Nilai</label> <input type="text" id="namaKolom" placeholder="Contoh: Tugas 2, Quiz, Proyek" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('kolom')">
           </div>
           <div><label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Penilaian</label> <input type="date" id="tanggalKolom" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('kolom')">
           </div>
         </div>
-        <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('kolomModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" class="btn-success flex-1 text-white px-6 py-3 rounded-xl font-medium"> ➕ Tambah Kolom </button>
+        <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('kolomModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" id="kolomSubmitBtn" class="btn-success flex-1 text-white px-6 py-3 rounded-xl font-medium"> ➕ Tambah Kolom </button>
         </div>
       </form>
     </div>
@@ -988,9 +1124,16 @@
           localStorage.removeItem(this.storageKey);
           this.initDefaultData();
           showNotification('🔄 Semua data berhasil direset!');
-          location.reload();
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
         }
       }
+    }
+
+    // Reset all data function
+    function resetAllData() {
+      dataManager.resetAllData();
     }
 
     // Initialize data manager
@@ -1008,16 +1151,10 @@
       notification.className = 'notification bg-white border-l-4 p-4 rounded-lg shadow-lg';
       if (type === 'success') {
         notification.classList.add('border-green-500');
-        notification.querySelector('span').textContent = '✓';
-        notification.querySelector('span').className = 'text-green-500 text-xl mr-3';
       } else if (type === 'error') {
         notification.classList.add('border-red-500');
-        notification.querySelector('span').textContent = '✗';
-        notification.querySelector('span').className = 'text-red-500 text-xl mr-3';
       } else if (type === 'info') {
         notification.classList.add('border-blue-500');
-        notification.querySelector('span').textContent = 'ℹ';
-        notification.querySelector('span').className = 'text-blue-500 text-xl mr-3';
       }
 
       notification.classList.add('show');
@@ -1054,18 +1191,65 @@
     }
 
     // Sidebar functionality
-    document.getElementById('menuToggle').addEventListener('click', function() {
-      document.getElementById('sidebar').classList.add('open');
-      document.getElementById('overlay').classList.add('show');
-    });
+    function initializeSidebar() {
+      const menuToggle = document.getElementById('menuToggle');
+      const closeSidebarBtn = document.getElementById('closeSidebar');
+      const overlay = document.getElementById('overlay');
 
-    document.getElementById('closeSidebar').addEventListener('click', closeSidebar);
-    document.getElementById('overlay').addEventListener('click', closeSidebar);
+      if (menuToggle) {
+        menuToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          document.getElementById('sidebar').classList.add('open');
+          document.getElementById('overlay').classList.add('show');
+        });
+      }
+
+      if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+      }
+
+      if (overlay) {
+        overlay.addEventListener('click', closeSidebar);
+      }
+    }
 
     function closeSidebar() {
       document.getElementById('sidebar').classList.remove('open');
       document.getElementById('overlay').classList.remove('show');
     }
+
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeSidebar();
+
+      // Semester change handler
+      const semesterSelect = document.getElementById('semesterSelect');
+      if (semesterSelect) {
+        semesterSelect.addEventListener('change', function() {
+          data.currentSemester = this.value;
+          dataManager.saveData();
+          showNotification(`Semester diubah ke ${this.value}`, 'info');
+          renderDashboard();
+        });
+      }
+
+      // Kelas filter change handlers
+      const kelasFilter = document.getElementById('kelasFilter');
+      if (kelasFilter) {
+        kelasFilter.addEventListener('change', renderSiswa);
+      }
+
+      const kelasNilaiFilter = document.getElementById('kelasNilaiFilter');
+      if (kelasNilaiFilter) {
+        kelasNilaiFilter.addEventListener('change', renderNilai);
+      }
+
+
+
+      // Initialize dashboard
+      showSection('dashboard');
+    });
 
     // Modal functionality
     function openModal(modalId, editData = null) {
@@ -1120,6 +1304,12 @@
       // Reset hidden fields
       const hiddenInputs = modal.querySelectorAll('input[type="hidden"]');
       hiddenInputs.forEach(input => input.value = '');
+
+      // Reset modal titles and buttons
+      if (modalId === 'kolomModal') {
+        document.getElementById('kolomModalTitle').textContent = 'Tambah Kolom Nilai';
+        document.getElementById('kolomSubmitBtn').innerHTML = '➕ Tambah Kolom';
+      }
     }
 
     // Detail Panel functionality
@@ -1133,10 +1323,13 @@
         return;
       }
 
+      // Show overlay
+      document.getElementById('detailOverlay').classList.add('show');
+
       const content = document.getElementById('detailContent');
 
       // Calculate statistics
-      let totalNilai = 0;
+      let totalNilaiSum = 0;
       let jumlahKolom = 0;
       let nilaiTertinggi = 0;
       let nilaiTerendah = 100;
@@ -1154,7 +1347,7 @@
             });
 
             // Hitung semua nilai termasuk nilai 0
-            totalNilai += nilaiKolom;
+            totalNilaiSum += nilaiKolom;
             jumlahKolom++;
             nilaiTertinggi = Math.max(nilaiTertinggi, nilaiKolom);
 
@@ -1168,7 +1361,7 @@
         });
       }
 
-      const nilaiRataRata = jumlahKolom > 0 ? (totalNilai / jumlahKolom).toFixed(1) : 0;
+      const nilaiRataRata = jumlahKolom > 0 ? (totalNilaiSum / jumlahKolom).toFixed(1) : 0;
       const gradeClass = getGradeClass(nilaiRataRata);
       const gradeText = getGradeText(nilaiRataRata);
 
@@ -1178,7 +1371,11 @@
 
       content.innerHTML = `
                 <div class="text-center mb-6">
-                    <div class="text-4xl mb-3">👤</div>
+                    <div class="text-4xl mb-3">
+                        <svg class="w-16 h-16 mx-auto text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
                     <h4 class="text-xl font-bold text-gray-900 mb-1">${siswa.nama}</h4>
                     <p class="text-gray-600">${kelas ? kelas.nama : 'Tidak ada'} • Semester ${data.currentSemester}</p>
                 </div>
@@ -1190,8 +1387,8 @@
                         <div class="text-xs text-gray-600">🎯 Rata-rata</div>
                     </div>
                     <div class="stats-card p-4 rounded-xl text-center">
-                        <div class="text-2xl font-bold text-purple-600 mb-1">${jumlahKolom}</div>
-                        <div class="text-xs text-gray-600">📝 Total Nilai</div>
+                        <div class="text-2xl font-bold text-purple-600 mb-1">${Math.round(totalNilaiSum)}</div>
+                        <div class="text-xs text-gray-600">➕ Total Nilai</div>
                     </div>
                     <div class="stats-card p-4 rounded-xl text-center">
                         <div class="text-2xl font-bold text-green-600 mb-1">${nilaiTertinggi}</div>
@@ -1213,7 +1410,12 @@
                 
                 <!-- Detailed Grades -->
                 <div class="space-y-3">
-                    <h5 class="font-semibold text-gray-900 mb-3">📊 Rincian Nilai</h5>
+                    <h5 class="font-semibold text-gray-900 mb-3">
+                        <svg class="w-5 h-5 inline-block mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+                        </svg>
+                        Rincian Nilai
+                    </h5>
                     ${nilaiData.map(item => {
                         const itemGradeClass = getGradeClass(item.nilai);
                         return `
@@ -1244,6 +1446,7 @@
 
     function closeDetailPanel() {
       document.getElementById('detailPanel').classList.remove('show');
+      document.getElementById('detailOverlay').classList.remove('show');
     }
 
     // Section navigation
@@ -1364,11 +1567,15 @@
         const gradeClass = getGradeClass(student.average);
         const gradeText = getGradeText(student.average);
 
-        // Medal for top 3
-        let rankDisplay = rank;
-        if (rank === 1) rankDisplay = '🥇 1';
-        else if (rank === 2) rankDisplay = '🥈 2';
-        else if (rank === 3) rankDisplay = '🥉 3';
+        // Medal for top 3 using SVG
+        let rankDisplay = `<span class="text-lg font-bold">${rank}</span>`;
+        if (rank === 1) {
+          rankDisplay = '<div class="w-8 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">1</div>';
+        } else if (rank === 2) {
+          rankDisplay = '<div class="w-8 h-8 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">2</div>';
+        } else if (rank === 3) {
+          rankDisplay = '<div class="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">3</div>';
+        }
 
         const row = document.createElement('tr');
         row.className = 'hover:bg-gray-50 transition-colors';
@@ -1418,7 +1625,11 @@
         tbody.innerHTML = `
                     <tr>
                         <td colspan="7" class="px-6 py-12 text-center text-gray-500">
-                            <div class="text-4xl mb-4">📚</div>
+                            <div class="text-4xl mb-4">
+                                <svg class="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"></path>
+                                </svg>
+                            </div>
                             <div class="text-lg">Belum ada data siswa</div>
                             <div class="text-sm">Tambahkan siswa dan nilai untuk melihat peringkat</div>
                         </td>
@@ -1435,7 +1646,11 @@
       if (topStudents.length === 0) {
         podiumContainer.innerHTML = `
                     <div class="col-span-3 text-center py-12 text-gray-500">
-                        <div class="text-4xl mb-4">🏆</div>
+                        <div class="text-4xl mb-4">
+                            <svg class="w-20 h-20 mx-auto text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                            </svg>
+                        </div>
                         <div class="text-lg">Belum ada data peringkat</div>
                         <div class="text-sm">Tambahkan nilai siswa untuk melihat podium pemenang</div>
                     </div>
@@ -1457,7 +1672,20 @@
         topStudents[2] || null // 3rd place (right on desktop)
       ];
 
-      const medals = isMobile ? ['🥇', '🥈', '🥉'] : ['🥈', '🥇', '🥉'];
+      const getMedalSVG = (position) => {
+        if (isMobile) {
+          // Mobile order: 1st, 2nd, 3rd
+          if (position === 0) return '<div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-xl border-4 border-yellow-300">1</div>';
+          if (position === 1) return '<div class="w-20 h-20 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-xl border-4 border-gray-200">2</div>';
+          return '<div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-xl border-4 border-orange-300">3</div>';
+        } else {
+          // Desktop order: 2nd, 1st, 3rd
+          if (position === 0) return '<div class="w-20 h-20 bg-gradient-to-br from-gray-300 to-gray-500 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-xl border-4 border-gray-200">2</div>';
+          if (position === 1) return '<div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-xl border-4 border-yellow-300">1</div>';
+          return '<div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-4xl shadow-xl border-4 border-orange-300">3</div>';
+        }
+      };
+
       const heights = isMobile ? ['h-72', 'h-56', 'h-48'] : ['h-56', 'h-72', 'h-48'];
       const gradients = isMobile ? [
         'from-yellow-100 to-amber-200 border-yellow-400',
@@ -1475,7 +1703,7 @@
           podiumContainer.innerHTML += `
                         <div class="flex flex-col items-center">
                             <div class="bg-gradient-to-b ${gradients[index]} border-2 rounded-2xl p-6 w-full ${heights[index]} flex flex-col justify-center items-center opacity-50">
-                                <div class="text-4xl mb-2">${medals[index]}</div>
+                                <div class="flex justify-center mb-2">${getMedalSVG(index)}</div>
                                 <div class="text-sm text-gray-500">Posisi ${positions[index]}</div>
                                 <div class="text-xs text-gray-400 mt-2">Belum ada</div>
                             </div>
@@ -1490,7 +1718,7 @@
         podiumContainer.innerHTML += `
                     <div class="flex flex-col items-center slide-in" style="animation-delay: ${index * 0.1}s">
                         <div class="mb-4 text-center">
-                            <div class="text-6xl mb-2">${medals[index]}</div>
+                            <div class="flex justify-center mb-2">${getMedalSVG(index)}</div>
                             <div class="text-3xl font-bold text-gray-900">${student.average}</div>
                             <div class="text-sm ${gradeClass.replace('grade-', 'text-').replace('excellent', 'green-600').replace('good', 'blue-600').replace('fair', 'yellow-600').replace('poor', 'red-600')} font-semibold">
                                 ${gradeText}
@@ -1498,7 +1726,11 @@
                         </div>
                         <div class="card-hover bg-gradient-to-b ${gradients[index]} border-2 rounded-2xl p-6 w-full ${heights[index]} flex flex-col justify-center items-center cursor-pointer" onclick="showDetailPanel(${student.siswaId})">
                             <div class="text-center">
-                                <div class="text-5xl mb-3">👤</div>
+                                <div class="text-5xl mb-3">
+                                    <svg class="w-16 h-16 mx-auto text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
                                 <div class="font-bold text-gray-900 text-lg mb-2">${student.nama}</div>
                                 <div class="text-sm text-gray-600 mb-3">${student.kelas ? student.kelas.nama : 'Tidak ada'}</div>
                                 <div class="text-xs text-gray-500 bg-white bg-opacity-50 px-3 py-1 rounded-full">
@@ -1515,7 +1747,7 @@
     function updateRankingKelasFilter() {
       const filter = document.getElementById('rankingKelasFilter');
       const currentValue = filter.value;
-      filter.innerHTML = '<option value="">📚 Semua Kelas</option>';
+      filter.innerHTML = '<option value="">��� Semua Kelas</option>';
       data.kelas.forEach(kelas => {
         filter.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
       });
@@ -1557,14 +1789,19 @@
                             <h3 class="text-xl font-bold text-blue-900 mb-2">${kelas.nama}</h3>
                             <p class="text-sm text-blue-700">🎓 Tingkat: ${kelas.tingkat}</p>
                             <p class="text-sm text-blue-700">👨‍🏫 Wali Kelas: ${kelas.waliKelas || '-'}</p>
-                            <p class="text-sm text-blue-700">👥 ${siswaCount} siswa</p>
+                            <p class="text-sm text-blue-700">
+                                <svg class="w-4 h-4 inline-block mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                                </svg>
+                                ${siswaCount} siswa
+                            </p>
                         </div>
                         <div class="flex space-x-2">
                             <button onclick="editKelas(${kelas.id})" class="text-blue-600 hover:text-blue-800 p-2 rounded-lg hover:bg-blue-100 transition-colors">
                                 ✏️
                             </button>
                             <button onclick="hapusKelas(${kelas.id})" class="text-red-600 hover:text-red-800 p-2 rounded-lg hover:bg-red-100 transition-colors">
-                                🗑️
+                                ���️
                             </button>
                         </div>
                     </div>
@@ -1783,7 +2020,7 @@
       // Download
       XLSX.writeFile(wb, 'Template_Import_Siswa.xlsx');
 
-      showNotification('📄 Template berhasil diunduh! Isi data sesuai format lalu import kembali.', 'success');
+      showNotification('��� Template berhasil diunduh! Isi data sesuai format lalu import kembali.', 'success');
     }
 
     function importSiswa() {
@@ -1881,7 +2118,7 @@
             renderSiswa();
 
             // Show result notification
-            let message = ` Berhasil import ${successCount} siswa`;
+            let message = `✅ Berhasil import ${successCount} siswa`;
             if (duplicateCount > 0) {
               message += `, ${duplicateCount} duplikat diabaikan`;
             }
@@ -1925,160 +2162,274 @@
       const kelasFilter = document.getElementById('kelasNilaiFilter').value;
       const semester = data.currentSemester;
 
+      if (!kelasFilter) {
+        document.getElementById('nilaiTableBody').innerHTML = `
+                    <tr>
+                        <td colspan="100" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-4">📚</div>
+                            <div class="text-lg">Pilih kelas terlebih dahulu</div>
+                        </td>
+                    </tr>
+                `;
+        return;
+      }
+
       // Update header
       const header = document.getElementById('nilaiTableHeader');
       header.innerHTML = '<th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50">Nama Siswa</th>';
 
+      // Add column headers
       data.kolomNilai.forEach(kolom => {
         header.innerHTML += `
-                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-32">
-                        <div class="flex items-center justify-between">
+                    <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <div class="flex flex-col gap-2">
                             <div>
-                                <div class="font-semibold">${kolom.nama}</div>
-                                <div class="text-xs text-gray-400">📅 ${kolom.tanggal}</div>
+                                <div>${kolom.nama}</div>
+                                <div class="text-xs text-gray-400 font-normal">${kolom.tanggal}</div>
                             </div>
-                            <button onclick="hapusKolomNilai('${kolom.nama}')" class="ml-2 text-red-500 hover:text-red-700 p-1 rounded hover:bg-red-50 transition-colors">
-                                ×
-                            </button>
+                            <div class="flex gap-2">
+                                <button onclick="editKolom('${kolom.nama}')" class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg transition-colors" title="Edit kolom">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
+                                    </svg>
+                                </button>
+                                <button onclick="hapusKolom('${kolom.nama}')" class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg transition-colors" title="Hapus kolom">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </th>
                 `;
       });
 
+      header.innerHTML += '<th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total Nilai</th>';
       header.innerHTML += '<th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nilai Akhir (%)</th>';
 
-      // Update body
+      // Render body
       const tbody = document.getElementById('nilaiTableBody');
+      const siswaList = data.siswa.filter(s => s.kelasId == kelasFilter);
+
       tbody.innerHTML = '';
+      siswaList.forEach(siswa => {
+        let nilaiRecord = data.nilai.find(n => n.siswaId === siswa.id && n.semester === semester);
 
-      let filteredSiswa = data.siswa;
-      if (kelasFilter) {
-        filteredSiswa = data.siswa.filter(s => s.kelasId == kelasFilter);
-      }
-
-      filteredSiswa.forEach(siswa => {
-        let nilaiSiswa = data.nilai.find(n => n.siswaId === siswa.id && n.semester === semester);
-        if (!nilaiSiswa) {
-          nilaiSiswa = {
+        if (!nilaiRecord) {
+          nilaiRecord = {
             siswaId: siswa.id,
-            semester: semester,
-            tanggal: new Date().toISOString().split('T')[0]
+            semester: semester
           };
-          data.kolomNilai.forEach(kolom => {
-            nilaiSiswa[kolom.nama] = 0;
-          });
-          data.nilai.push(nilaiSiswa);
+          data.nilai.push(nilaiRecord);
         }
 
         const row = document.createElement('tr');
-        row.className = 'hover:bg-gray-50 transition-colors';
+        row.className = 'hover:bg-gray-50';
 
-        let rowHTML = `<td class="px-6 py-4 font-medium text-gray-900 sticky left-0 bg-white">${siswa.nama}</td>`;
+        row.innerHTML = `<td class="px-6 py-4 font-medium text-gray-900 sticky left-0 bg-white">${siswa.nama}</td>`;
 
-        let totalNilai = 0;
-        let jumlahKolom = 0;
-
+        // Add value inputs
         data.kolomNilai.forEach(kolom => {
-          const nilai = nilaiSiswa[kolom.nama] || 0;
-          totalNilai += parseFloat(nilai);
-          jumlahKolom++;
-
-          rowHTML += `
+          const nilai = nilaiRecord[kolom.nama] !== undefined ? nilaiRecord[kolom.nama] : '';
+          row.innerHTML += `
                         <td class="px-6 py-4">
-                            <input type="number" value="${nilai}" min="0" max="100" 
-                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-center" 
-                                   onblur="updateNilai(${siswa.id}, '${kolom.nama}', this.value)">
+                            <input type="number" 
+                                   min="0" 
+                                   max="100" 
+                                   value="${nilai}"
+                                   placeholder="0-100"
+                                   onchange="updateNilai(${siswa.id}, '${kolom.nama}', this.value)"
+                                   class="input-field w-24 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                         </td>
                     `;
         });
 
-        const nilaiAkhir = jumlahKolom > 0 ? (totalNilai / jumlahKolom).toFixed(1) : 0;
-        const gradeClass = getGradeClass(nilaiAkhir);
-        const gradeText = getGradeText(nilaiAkhir);
+        // Calculate total and final grade
+        let totalNilai = 0;
+        let jumlahKolom = 0;
 
-        rowHTML += `
+        data.kolomNilai.forEach(kolom => {
+          if (nilaiRecord[kolom.nama] !== undefined) {
+            totalNilai += parseFloat(nilaiRecord[kolom.nama]) || 0;
+            jumlahKolom++;
+          }
+        });
+
+        const average = calculateStudentAverage(siswa.id);
+        const gradeClass = getGradeClass(average);
+
+        row.innerHTML += `
                     <td class="px-6 py-4">
-                        <div class="text-center">
-                            <div class="font-bold text-lg ${gradeClass} px-3 py-2 rounded-lg inline-block">
-                                ${nilaiAkhir}
-                            </div>
-                            <div class="text-xs text-gray-500 mt-1">
-                                ${gradeText}
-                            </div>
-                        </div>
+                        <span class="bg-purple-100 text-purple-800 px-3 py-1.5 rounded-lg font-bold text-lg border border-purple-300">
+                            ${Math.round(totalNilai)}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="${gradeClass} px-3 py-1.5 rounded-lg font-bold text-lg">
+                            ${average}
+                        </span>
                     </td>
                 `;
 
-        row.innerHTML = rowHTML;
         tbody.appendChild(row);
       });
+
+      if (siswaList.length === 0) {
+        tbody.innerHTML = `
+                    <tr>
+                        <td colspan="100" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-4">
+                                <svg class="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                                </svg>
+                            </div>
+                            <div class="text-lg">Tidak ada siswa di kelas ini</div>
+                        </td>
+                    </tr>
+                `;
+      }
+    }
+
+    function updateNilai(siswaId, kolomNama, nilai) {
+      const semester = data.currentSemester;
+      let nilaiRecord = data.nilai.find(n => n.siswaId === siswaId && n.semester === semester);
+
+      if (!nilaiRecord) {
+        nilaiRecord = {
+          siswaId: siswaId,
+          semester: semester,
+          tanggal: new Date().toISOString().split('T')[0]
+        };
+        data.nilai.push(nilaiRecord);
+      }
+
+      nilaiRecord[kolomNama] = parseFloat(nilai) || 0;
+      nilaiRecord.tanggal = new Date().toISOString().split('T')[0];
+
+      dataManager.saveData();
+      renderNilai();
     }
 
     function submitKolom(event) {
       event.preventDefault();
       const nama = document.getElementById('namaKolom').value;
       const tanggal = document.getElementById('tanggalKolom').value;
+      const oldNama = document.getElementById('oldKolomNama').value;
 
-      if (data.kolomNilai.find(k => k.nama === nama)) {
-        showNotification('Jenis nilai sudah ada!', 'error');
-        return;
+      if (oldNama) {
+        // Edit existing column
+        // Check if new name already exists (but not the old name)
+        if (oldNama !== nama && data.kolomNilai.find(k => k.nama === nama)) {
+          showNotification('Kolom dengan nama ini sudah ada!', 'error');
+          return;
+        }
+
+        // Update column name
+        const kolom = data.kolomNilai.find(k => k.nama === oldNama);
+        if (kolom) {
+          kolom.nama = nama;
+          kolom.tanggal = tanggal;
+
+          // Update all nilai records with new column name
+          if (oldNama !== nama) {
+            data.nilai.forEach(n => {
+              if (n[oldNama] !== undefined) {
+                n[nama] = n[oldNama];
+                delete n[oldNama];
+              }
+            });
+          }
+
+          showNotification(`Kolom "${oldNama}" berhasil diperbarui menjadi "${nama}"!`);
+        }
+      } else {
+        // Add new column
+        // Check if column already exists
+        if (data.kolomNilai.find(k => k.nama === nama)) {
+          showNotification('Kolom dengan nama ini sudah ada!', 'error');
+          return;
+        }
+
+        data.kolomNilai.push({
+          nama,
+          tanggal
+        });
+        showNotification(`Kolom ${nama} berhasil ditambahkan!`);
       }
 
-      data.kolomNilai.push({
-        nama,
-        tanggal
-      });
       dataManager.saveData();
-
       closeModal('kolomModal');
       renderNilai();
-      showNotification(`Kolom ${nama} berhasil ditambahkan!`);
+      updateFilterOptions();
     }
 
-    function hapusKolomNilai(nama) {
-      if (confirm(`Yakin ingin menghapus kolom "${nama}"? Data nilai akan hilang.`)) {
-        data.kolomNilai = data.kolomNilai.filter(k => k.nama !== nama);
-        data.nilai.forEach(n => delete n[nama]);
+    function editKolom(namaKolom) {
+      const kolom = data.kolomNilai.find(k => k.nama === namaKolom);
+      if (!kolom) return;
+
+      // Open modal and populate form
+      document.getElementById('kolomModalTitle').textContent = 'Edit Kolom Nilai';
+      document.getElementById('oldKolomNama').value = namaKolom;
+      document.getElementById('namaKolom').value = kolom.nama;
+      document.getElementById('tanggalKolom').value = kolom.tanggal;
+      document.getElementById('kolomSubmitBtn').innerHTML = '✏️ Update Kolom';
+
+      updateFormProgress('kolom');
+
+      const modal = document.getElementById('kolomModal');
+      modal.classList.add('show');
+    }
+
+    function hapusKolom(namaKolom) {
+      if (confirm(`Yakin ingin menghapus kolom "${namaKolom}"? Data nilai akan ikut terhapus.`)) {
+        data.kolomNilai = data.kolomNilai.filter(k => k.nama !== namaKolom);
+
+        // Remove column data from all nilai records
+        data.nilai.forEach(n => {
+          delete n[namaKolom];
+        });
+
         dataManager.saveData();
         renderNilai();
-        showNotification(`Kolom ${nama} berhasil dihapus!`);
+        updateFilterOptions();
+        showNotification(`Kolom ${namaKolom} berhasil dihapus!`);
       }
     }
 
-    function updateNilai(siswaId, kolom, nilai) {
-      const semester = data.currentSemester;
-      let nilaiSiswa = data.nilai.find(n => n.siswaId === siswaId && n.semester === semester);
+    // Grade classification helpers
+    function getGradeClass(nilai) {
+      if (nilai >= 85) return 'grade-excellent';
+      if (nilai >= 75) return 'grade-good';
+      if (nilai >= 65) return 'grade-fair';
+      return 'grade-poor';
+    }
 
-      if (!nilaiSiswa) {
-        nilaiSiswa = {
-          siswaId: siswaId,
-          semester: semester,
-          tanggal: new Date().toISOString().split('T')[0]
-        };
-        data.nilai.push(nilaiSiswa);
-      }
-
-      nilaiSiswa[kolom] = parseFloat(nilai) || 0;
-      dataManager.saveData();
-      renderNilai();
+    function getGradeText(nilai) {
+      if (nilai >= 85) return '⭐ Sangat Baik';
+      if (nilai >= 75) return '👍 Baik';
+      if (nilai >= 65) return '���� Cukup';
+      return '📉 Perlu Perbaikan';
     }
 
     // Filter functionality
     function updateFilterOptions() {
+      // Update kelas filter
       const filterKelas = document.getElementById('filterKelas');
-      const filterJenisNilai = document.getElementById('filterJenisNilai');
-
-      // Update kelas options
+      const currentKelas = filterKelas.value;
       filterKelas.innerHTML = '<option value="">Semua Kelas</option>';
       data.kelas.forEach(kelas => {
         filterKelas.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
       });
+      filterKelas.value = currentKelas;
 
-      // Update jenis nilai options
+      // Update jenis nilai filter
+      const filterJenisNilai = document.getElementById('filterJenisNilai');
+      const currentJenis = filterJenisNilai.value;
       filterJenisNilai.innerHTML = '<option value="">Semua Jenis</option>';
       data.kolomNilai.forEach(kolom => {
         filterJenisNilai.innerHTML += `<option value="${kolom.nama}">${kolom.nama}</option>`;
       });
+      filterJenisNilai.value = currentJenis;
     }
 
     function applyFilter() {
@@ -2088,1110 +2439,91 @@
       const kelasId = document.getElementById('filterKelas').value;
       const jenisNilai = document.getElementById('filterJenisNilai').value;
 
-      // Get unique students that match the filter criteria
-      const uniqueStudents = new Map();
+      let filteredSiswa = data.siswa;
 
-      data.siswa.forEach(siswa => {
+      // Filter by kelas
+      if (kelasId) {
+        filteredSiswa = filteredSiswa.filter(s => s.kelasId == kelasId);
+      }
+
+      // Filter by nama
+      if (namaSiswa) {
+        filteredSiswa = filteredSiswa.filter(s => s.nama.toLowerCase().includes(namaSiswa));
+      }
+
+      // Filter by date and jenis nilai
+      const results = filteredSiswa.map(siswa => {
         const kelas = data.kelas.find(k => k.id === siswa.kelasId);
         const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
 
-        if (!siswa || !kelas) return;
+        if (!nilai) return null;
 
-        // Apply filters
-        if (namaSiswa && !siswa.nama.toLowerCase().includes(namaSiswa)) return;
-        if (kelasId && siswa.kelasId != kelasId) return;
-        if (tanggalMulai && nilai && nilai.tanggal < tanggalMulai) return;
-        if (tanggalAkhir && nilai && nilai.tanggal > tanggalAkhir) return;
+        // Check date filter
+        if (tanggalMulai && nilai.tanggal < tanggalMulai) return null;
+        if (tanggalAkhir && nilai.tanggal > tanggalAkhir) return null;
 
-        // Check if student has the specific jenis nilai (if filter is applied)
-        if (jenisNilai && nilai && nilai[jenisNilai] === undefined) return;
+        // Check jenis nilai filter
+        if (jenisNilai && (nilai[jenisNilai] === undefined || nilai[jenisNilai] === null)) return null;
 
-        // Calculate average for this student
-        let totalNilai = 0;
-        let jumlahKolom = 0;
+        return {
+          siswa,
+          kelas,
+          nilai,
+          average: calculateStudentAverage(siswa.id)
+        };
+      }).filter(r => r !== null);
 
-        if (nilai) {
-          data.kolomNilai.forEach(kolom => {
-            if (nilai[kolom.nama] !== undefined) {
-              totalNilai += parseFloat(nilai[kolom.nama]) || 0;
-              jumlahKolom++;
-            }
-          });
-        }
-
-        const nilaiRataRata = jumlahKolom > 0 ? (totalNilai / jumlahKolom).toFixed(1) : 0;
-
-        uniqueStudents.set(siswa.id, {
-          siswaId: siswa.id,
-          namaSiswa: siswa.nama,
-          kelas: kelas.nama,
-          semester: data.currentSemester,
-          nilaiRataRata: nilaiRataRata
-        });
-      });
-
-      // Display results
-      const resultsDiv = document.getElementById('filterResults');
+      // Render results
       const tbody = document.getElementById('filterTableBody');
-
       tbody.innerHTML = '';
-      Array.from(uniqueStudents.values()).forEach(item => {
+
+      results.forEach(result => {
+        const gradeClass = getGradeClass(result.average);
+
         const row = document.createElement('tr');
-        row.className = 'hover:bg-gray-50 transition-colors';
-
-        const gradeClass = getGradeClass(item.nilaiRataRata);
-        const gradeText = getGradeText(item.nilaiRataRata);
-
-        // Highlight search term
-        let displayName = item.namaSiswa;
-        if (namaSiswa) {
-          const regex = new RegExp(`(${namaSiswa})`, 'gi');
-          displayName = item.namaSiswa.replace(regex, '<span class="bg-yellow-200 px-1 rounded">$1</span>');
-        }
-
+        row.className = 'hover:bg-gray-50';
         row.innerHTML = `
-                    <td class="px-6 py-4">
-                        <div class="font-medium text-gray-900">${displayName}</div>
-                    </td>
+                    <td class="px-6 py-4 font-medium text-gray-900">${result.siswa.nama}</td>
                     <td class="px-6 py-4">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            ${item.kelas}
+                            ${result.kelas ? result.kelas.nama : 'Tidak ada'}
                         </span>
                     </td>
                     <td class="px-6 py-4">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                            ${item.semester === 'ganjil' ? '🌙 Ganjil' : '☀️ Genap'}
+                            ${data.currentSemester === 'ganjil' ? '🌙 Ganjil' : '☀️ Genap'}
                         </span>
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-2">
-                            <span class="font-bold ${gradeClass} px-3 py-1 rounded-lg text-sm">
-                                ${item.nilaiRataRata}
-                            </span>
-                            <span class="text-xs text-gray-500">${gradeText}</span>
-                        </div>
+                        <span class="${gradeClass} px-3 py-1.5 rounded-lg font-bold">
+                            ${result.average}
+                        </span>
                     </td>
                     <td class="px-6 py-4">
-                        <button onclick="showDetailPanel(${item.siswaId})" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all">
-                            🔍 Detail
+                        <button onclick="showDetailPanel(${result.siswa.id})" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all">
+                            🔍 Lihat Detail
                         </button>
                     </td>
                 `;
         tbody.appendChild(row);
       });
 
-      resultsDiv.classList.remove('hidden');
-      showNotification(`Ditemukan ${uniqueStudents.size} siswa sesuai filter!`);
-    }
-
-    // Export Ranking functionality
-    function exportRankingExcel() {
-      const kelasFilter = document.getElementById('exportKelasSelect').value;
-      const sortType = document.getElementById('exportSortType').value;
-      const tahunAjaran = document.getElementById('exportTahunAjaran').value;
-      const judulLaporan = document.getElementById('exportJudulLaporan').value;
-      const tambahNIS = document.getElementById('exportTambahNIS').checked;
-
-      // Get selected nilai columns
-      const selectedKolom = [];
-      document.querySelectorAll('#exportNilaiCheckboxes input[type="checkbox"]:checked').forEach(checkbox => {
-        selectedKolom.push(checkbox.value);
-      });
-
-      if (selectedKolom.length === 0) {
-        showNotification('Pilih minimal satu jenis nilai!', 'error');
-        return;
-      }
-
-      // Get ranked students
-      let rankedStudents = getRankedStudents(kelasFilter);
-
-      // Sort based on selection
-      if (sortType === 'abjad') {
-        rankedStudents.sort((a, b) => a.nama.localeCompare(b.nama));
-      }
-
-      if (rankedStudents.length === 0) {
-        showNotification('Tidak ada data siswa untuk di-export!', 'error');
-        return;
-      }
-
-      // Create workbook
-      const wb = XLSX.utils.book_new();
-
-      // Prepare data
-      const sheetData = [];
-
-      // Title rows
-      const kelasName = kelasFilter ? data.kelas.find(k => k.id == kelasFilter).nama : 'Semua Kelas';
-      sheetData.push([judulLaporan]);
-      sheetData.push([`Kelas: ${kelasName}`]);
-      sheetData.push([`Tahun Ajaran: ${tahunAjaran}`]);
-      sheetData.push([`Semester: ${data.currentSemester === 'ganjil' ? 'Ganjil' : 'Genap'}`]);
-      sheetData.push([]); // Empty row
-
-      // Header row
-      const headers = [sortType === 'ranking' ? 'Peringkat' : 'No'];
-      if (tambahNIS) headers.push('NIS');
-      headers.push('Nama');
-      selectedKolom.forEach(kolom => headers.push(kolom));
-      headers.push('Rata-rata', 'Status');
-      sheetData.push(headers);
-
-      // Data rows
-      rankedStudents.forEach((student, index) => {
-        const siswa = data.siswa.find(s => s.id === student.siswaId);
-        const nilai = data.nilai.find(n => n.siswaId === student.siswaId && n.semester === data.currentSemester);
-
-        const row = [index + 1];
-        if (tambahNIS) row.push(siswa.nis || '-');
-        row.push(student.nama);
-
-        // Add selected nilai columns
-        selectedKolom.forEach(kolom => {
-          row.push(nilai && nilai[kolom] ? nilai[kolom] : 0);
-        });
-
-        row.push(parseFloat(student.average));
-        row.push(getGradeText(student.average));
-
-        sheetData.push(row);
-      });
-
-      // Create worksheet
-      const ws = XLSX.utils.aoa_to_sheet(sheetData);
-
-      // Merge title cells
-      ws['!merges'] = [{
-          s: {
-            r: 0,
-            c: 0
-          },
-          e: {
-            r: 0,
-            c: headers.length - 1
-          }
-        },
-        {
-          s: {
-            r: 1,
-            c: 0
-          },
-          e: {
-            r: 1,
-            c: headers.length - 1
-          }
-        },
-        {
-          s: {
-            r: 2,
-            c: 0
-          },
-          e: {
-            r: 2,
-            c: headers.length - 1
-          }
-        },
-        {
-          s: {
-            r: 3,
-            c: 0
-          },
-          e: {
-            r: 3,
-            c: headers.length - 1
-          }
-        }
-      ];
-
-      // Set column widths
-      const colWidths = [{
-        wch: 12
-      }]; // Peringkat
-      if (tambahNIS) colWidths.push({
-        wch: 12
-      }); // NIS
-      colWidths.push({
-        wch: 25
-      }); // Nama
-      selectedKolom.forEach(() => colWidths.push({
-        wch: 15
-      })); // Nilai columns
-      colWidths.push({
-        wch: 12
-      }); // Rata-rata
-      colWidths.push({
-        wch: 20
-      }); // Status
-      ws['!cols'] = colWidths;
-
-      // Style title rows (0-3)
-      for (let row = 0; row < 4; row++) {
-        const cellAddress = XLSX.utils.encode_cell({
-          r: row,
-          c: 0
-        });
-        if (ws[cellAddress]) {
-          ws[cellAddress].s = {
-            font: {
-              bold: true,
-              size: row === 0 ? 16 : 12
-            },
-            alignment: {
-              horizontal: "center",
-              vertical: "center"
-            }
-          };
-        }
-      }
-
-      // Style header row (row 5)
-      const headerRow = 5;
-      for (let col = 0; col < headers.length; col++) {
-        const cellAddress = XLSX.utils.encode_cell({
-          r: headerRow,
-          c: col
-        });
-        if (ws[cellAddress]) {
-          ws[cellAddress].s = {
-            fill: {
-              fgColor: {
-                rgb: "4F81BD"
-              }
-            },
-            font: {
-              color: {
-                rgb: "FFFFFF"
-              },
-              bold: true
-            },
-            alignment: {
-              horizontal: "center",
-              vertical: "center"
-            },
-            border: {
-              top: {
-                style: "thin"
-              },
-              bottom: {
-                style: "thin"
-              },
-              left: {
-                style: "thin"
-              },
-              right: {
-                style: "thin"
-              }
-            }
-          };
-        }
-      }
-
-      // Style data rows
-      for (let row = headerRow + 1; row < sheetData.length; row++) {
-        for (let col = 0; col < headers.length; col++) {
-          const cellAddress = XLSX.utils.encode_cell({
-            r: row,
-            c: col
-          });
-          if (!ws[cellAddress]) continue;
-
-          ws[cellAddress].s = {
-            alignment: {
-              horizontal: col <= 2 ? "left" : "center",
-              vertical: "center"
-            },
-            border: {
-              top: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              },
-              bottom: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              },
-              left: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              },
-              right: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              }
-            }
-          };
-
-          // Alternate row colors
-          if ((row - headerRow) % 2 === 0) {
-            ws[cellAddress].s.fill = {
-              fgColor: {
-                rgb: "F2F2F2"
-              }
-            };
-          }
-
-          // Color code for rata-rata column
-          if (col === headers.length - 2) {
-            const nilai = parseFloat(ws[cellAddress].v);
-            if (nilai >= 85) {
-              ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "C6EFCE"
-                }
-              };
-              ws[cellAddress].s.font = {
-                color: {
-                  rgb: "006100"
-                },
-                bold: true
-              };
-            } else if (nilai >= 75) {
-              ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "C6E0FF"
-                }
-              };
-              ws[cellAddress].s.font = {
-                color: {
-                  rgb: "0066CC"
-                },
-                bold: true
-              };
-            } else if (nilai >= 65) {
-              ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "FFEB9C"
-                }
-              };
-              ws[cellAddress].s.font = {
-                color: {
-                  rgb: "9C6500"
-                },
-                bold: true
-              };
-            } else {
-              ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "FFC7CE"
-                }
-              };
-              ws[cellAddress].s.font = {
-                color: {
-                  rgb: "9C0006"
-                },
-                bold: true
-              };
-            }
-          }
-
-          // Highlight top 3 only for ranking mode
-          if (sortType === 'ranking' && row <= headerRow + 3) {
-            if (col === 0) {
-              ws[cellAddress].s.font = {
-                bold: true,
-                size: 12
-              };
-              if (row === headerRow + 1) ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "FFD700"
-                }
-              }; // Gold
-              else if (row === headerRow + 2) ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "C0C0C0"
-                }
-              }; // Silver
-              else if (row === headerRow + 3) ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "CD7F32"
-                }
-              }; // Bronze
-            }
-          }
-        }
-      }
-
-      // Add worksheet to workbook
-      const sheetName = 'Ranking Siswa';
-      XLSX.utils.book_append_sheet(wb, ws, sheetName);
-
-      // Generate filename
-      const now = new Date();
-      const timestamp = now.toISOString().split('T')[0];
-      const sortSuffix = sortType === 'ranking' ? 'Ranking' : 'Abjad';
-      const filename = `${sortSuffix}_${kelasName.replace(/\s+/g, '_')}_${timestamp}.xlsx`;
-
-      // Write and download
-      XLSX.writeFile(wb, filename);
-
-      const sortText = sortType === 'ranking' ? 'berdasarkan ranking' : 'berdasarkan abjad';
-      showNotification(`📊 File "${filename}" berhasil diunduh ${sortText}!`);
-    }
-
-    function exportRankingCSV() {
-      const kelasFilter = document.getElementById('exportKelasSelect').value;
-      const sortType = document.getElementById('exportSortType').value;
-      const tahunAjaran = document.getElementById('exportTahunAjaran').value;
-      const judulLaporan = document.getElementById('exportJudulLaporan').value;
-      const tambahNIS = document.getElementById('exportTambahNIS').checked;
-
-      // Get selected nilai columns
-      const selectedKolom = [];
-      document.querySelectorAll('#exportNilaiCheckboxes input[type="checkbox"]:checked').forEach(checkbox => {
-        selectedKolom.push(checkbox.value);
-      });
-
-      if (selectedKolom.length === 0) {
-        showNotification('Pilih minimal satu jenis nilai!', 'error');
-        return;
-      }
-
-      // Get ranked students
-      let rankedStudents = getRankedStudents(kelasFilter);
-
-      // Sort based on selection
-      if (sortType === 'abjad') {
-        rankedStudents.sort((a, b) => a.nama.localeCompare(b.nama));
-      }
-
-      if (rankedStudents.length === 0) {
-        showNotification('Tidak ada data siswa untuk di-export!', 'error');
-        return;
-      }
-
-      // Build CSV content
-      const kelasName = kelasFilter ? data.kelas.find(k => k.id == kelasFilter).nama : 'Semua Kelas';
-      let csvContent = `${judulLaporan}\n`;
-      csvContent += `Kelas: ${kelasName}\n`;
-      csvContent += `Tahun Ajaran: ${tahunAjaran}\n`;
-      csvContent += `Semester: ${data.currentSemester === 'ganjil' ? 'Ganjil' : 'Genap'}\n\n`;
-
-      // Header
-      csvContent += sortType === 'ranking' ? 'Peringkat,' : 'No,';
-      if (tambahNIS) csvContent += 'NIS,';
-      csvContent += 'Nama,';
-      csvContent += selectedKolom.join(',') + ',';
-      csvContent += 'Rata-rata,Status\n';
-
-      // Data rows
-      rankedStudents.forEach((student, index) => {
-        const siswa = data.siswa.find(s => s.id === student.siswaId);
-        const nilai = data.nilai.find(n => n.siswaId === student.siswaId && n.semester === data.currentSemester);
-
-        let row = `${index + 1},`;
-        if (tambahNIS) row += `${siswa.nis || '-'},`;
-        row += `"${student.nama}",`;
-
-        selectedKolom.forEach(kolom => {
-          row += `${nilai && nilai[kolom] ? nilai[kolom] : 0},`;
-        });
-
-        row += `${student.average},`;
-        row += `"${getGradeText(student.average)}"\n`;
-
-        csvContent += row;
-      });
-
-      // Download
-      const blob = new Blob([csvContent], {
-        type: 'text/csv;charset=utf-8;'
-      });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      const timestamp = new Date().toISOString().split('T')[0];
-      const sortSuffix = sortType === 'ranking' ? 'Ranking' : 'Abjad';
-      a.download = `${sortSuffix}_${kelasName.replace(/\s+/g, '_')}_${timestamp}.csv`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-
-      const sortText = sortType === 'ranking' ? 'berdasarkan ranking' : 'berdasarkan abjad';
-      showNotification(`📋 File CSV berhasil diunduh ${sortText}!`);
-    }
-
-    function updateExportOptions() {
-      // Update kelas filter
-      const kelasSelect = document.getElementById('exportKelasSelect');
-      kelasSelect.innerHTML = '<option value="">📚 Semua Kelas</option>';
-      data.kelas.forEach(kelas => {
-        kelasSelect.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
-      });
-
-      // Update nilai checkboxes
-      const checkboxContainer = document.getElementById('exportNilaiCheckboxes');
-      checkboxContainer.innerHTML = '';
-
-      if (data.kolomNilai.length === 0) {
-        checkboxContainer.innerHTML = '<p class="text-sm text-gray-500 text-center py-4">Belum ada jenis nilai</p>';
-        return;
-      }
-
-      data.kolomNilai.forEach(kolom => {
-        const label = document.createElement('label');
-        label.className = 'flex items-center space-x-2 cursor-pointer hover:bg-white p-2 rounded-lg transition-colors';
-        label.innerHTML = `
-                    <input type="checkbox" value="${kolom.nama}" checked class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
-                    <span class="text-sm text-gray-700">${kolom.nama} <span class="text-xs text-gray-500">(${kolom.tanggal})</span></span>
+      if (results.length === 0) {
+        tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-4">🔍</div>
+                            <div class="text-lg">Tidak ada data yang sesuai dengan filter</div>
+                        </td>
+                    </tr>
                 `;
-        checkboxContainer.appendChild(label);
-      });
+      }
+
+      document.getElementById('filterResults').classList.remove('hidden');
+      showNotification(`Ditemukan ${results.length} hasil`, 'info');
     }
 
     // Export functionality
-    function eksporExcel() {
-      // Create workbook
-      const wb = XLSX.utils.book_new();
-
-      // Create sheet for each class
-      data.kelas.forEach(kelas => {
-        const siswaKelas = data.siswa.filter(s => s.kelasId === kelas.id);
-        if (siswaKelas.length === 0) return;
-
-        // Prepare data for this class
-        const sheetData = [];
-
-        // Header row
-        const headers = ['No', 'Nama Siswa', 'Kelas'];
-        data.kolomNilai.forEach(kolom => {
-          headers.push(`${kolom.nama} (${kolom.tanggal})`);
-        });
-        headers.push('Rata-rata', 'Persentase');
-        sheetData.push(headers);
-
-        // Data rows
-        siswaKelas.forEach((siswa, index) => {
-          const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
-          const row = [index + 1, siswa.nama, kelas.nama];
-
-          let totalNilai = 0;
-          let jumlahKolom = 0;
-
-          data.kolomNilai.forEach(kolom => {
-            const nilaiKolom = nilai ? (parseFloat(nilai[kolom.nama]) || 0) : 0;
-            row.push(nilaiKolom);
-            totalNilai += nilaiKolom;
-            jumlahKolom++;
-          });
-
-          const nilaiRataRata = jumlahKolom > 0 ? (totalNilai / jumlahKolom) : 0;
-          const persentase = (nilaiRataRata / 100) * 100;
-
-          row.push(parseFloat(nilaiRataRata.toFixed(1)));
-          row.push(`${persentase.toFixed(1)}%`);
-
-          sheetData.push(row);
-        });
-
-        // Create worksheet
-        const ws = XLSX.utils.aoa_to_sheet(sheetData);
-
-        // Set column widths
-        const colWidths = [];
-        colWidths.push({
-          wch: 5
-        }); // No
-        colWidths.push({
-          wch: 25
-        }); // Nama Siswa
-        colWidths.push({
-          wch: 15
-        }); // Kelas
-        data.kolomNilai.forEach(() => {
-          colWidths.push({
-            wch: 18
-          }); // Nilai columns
-        });
-        colWidths.push({
-          wch: 12
-        }); // Rata-rata
-        colWidths.push({
-          wch: 12
-        }); // Persentase
-
-        ws['!cols'] = colWidths;
-
-        // Style header row
-        const headerRange = XLSX.utils.decode_range(ws['!ref']);
-        for (let col = headerRange.s.c; col <= headerRange.e.c; col++) {
-          const cellAddress = XLSX.utils.encode_cell({
-            r: 0,
-            c: col
-          });
-          if (!ws[cellAddress]) continue;
-
-          ws[cellAddress].s = {
-            fill: {
-              fgColor: {
-                rgb: "4F81BD"
-              }
-            },
-            font: {
-              color: {
-                rgb: "FFFFFF"
-              },
-              bold: true
-            },
-            alignment: {
-              horizontal: "center",
-              vertical: "center"
-            },
-            border: {
-              top: {
-                style: "thin",
-                color: {
-                  rgb: "000000"
-                }
-              },
-              bottom: {
-                style: "thin",
-                color: {
-                  rgb: "000000"
-                }
-              },
-              left: {
-                style: "thin",
-                color: {
-                  rgb: "000000"
-                }
-              },
-              right: {
-                style: "thin",
-                color: {
-                  rgb: "000000"
-                }
-              }
-            }
-          };
-        }
-
-        // Style data cells
-        for (let row = 1; row <= headerRange.e.r; row++) {
-          for (let col = headerRange.s.c; col <= headerRange.e.c; col++) {
-            const cellAddress = XLSX.utils.encode_cell({
-              r: row,
-              c: col
-            });
-            if (!ws[cellAddress]) continue;
-
-            ws[cellAddress].s = {
-              alignment: {
-                horizontal: col === 1 ? "left" : "center",
-                vertical: "center"
-              },
-              border: {
-                top: {
-                  style: "thin",
-                  color: {
-                    rgb: "CCCCCC"
-                  }
-                },
-                bottom: {
-                  style: "thin",
-                  color: {
-                    rgb: "CCCCCC"
-                  }
-                },
-                left: {
-                  style: "thin",
-                  color: {
-                    rgb: "CCCCCC"
-                  }
-                },
-                right: {
-                  style: "thin",
-                  color: {
-                    rgb: "CCCCCC"
-                  }
-                }
-              }
-            };
-
-            // Alternate row colors
-            if (row % 2 === 0) {
-              ws[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "F2F2F2"
-                }
-              };
-            }
-
-            // Color code grades in rata-rata column
-            if (col === headerRange.e.c - 1) { // Rata-rata column
-              const nilai = parseFloat(ws[cellAddress].v);
-              if (nilai >= 85) {
-                ws[cellAddress].s.fill = {
-                  fgColor: {
-                    rgb: "C6EFCE"
-                  }
-                };
-                ws[cellAddress].s.font = {
-                  color: {
-                    rgb: "006100"
-                  },
-                  bold: true
-                };
-              } else if (nilai >= 75) {
-                ws[cellAddress].s.fill = {
-                  fgColor: {
-                    rgb: "C6E0FF"
-                  }
-                };
-                ws[cellAddress].s.font = {
-                  color: {
-                    rgb: "0066CC"
-                  },
-                  bold: true
-                };
-              } else if (nilai >= 65) {
-                ws[cellAddress].s.fill = {
-                  fgColor: {
-                    rgb: "FFEB9C"
-                  }
-                };
-                ws[cellAddress].s.font = {
-                  color: {
-                    rgb: "9C6500"
-                  },
-                  bold: true
-                };
-              } else {
-                ws[cellAddress].s.fill = {
-                  fgColor: {
-                    rgb: "FFC7CE"
-                  }
-                };
-                ws[cellAddress].s.font = {
-                  color: {
-                    rgb: "9C0006"
-                  },
-                  bold: true
-                };
-              }
-            }
-          }
-        }
-
-        // Add worksheet to workbook
-        const sheetName = kelas.nama.replace(/[^\w\s]/gi, '').substring(0, 31);
-        XLSX.utils.book_append_sheet(wb, ws, sheetName);
-      });
-
-      // Create summary sheet
-      const summaryData = [];
-      summaryData.push(['No', 'Kelas', 'Jumlah Siswa', 'Rata-rata Kelas', 'Nilai Tertinggi', 'Nilai Terendah', 'Status']);
-
-      data.kelas.forEach((kelas, index) => {
-        const siswaKelas = data.siswa.filter(s => s.kelasId === kelas.id);
-        if (siswaKelas.length === 0) return;
-
-        let totalNilaiKelas = 0;
-        let jumlahSiswa = 0;
-        let nilaiTertinggi = 0;
-        let nilaiTerendah = 100;
-
-        siswaKelas.forEach(siswa => {
-          const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
-          if (nilai && data.kolomNilai.length > 0) {
-            let totalNilaiSiswa = 0;
-            let jumlahKolomSiswa = 0;
-
-            data.kolomNilai.forEach(kolom => {
-              if (nilai[kolom.nama] !== undefined) {
-                totalNilaiSiswa += parseFloat(nilai[kolom.nama]) || 0;
-                jumlahKolomSiswa++;
-              }
-            });
-
-            if (jumlahKolomSiswa > 0) {
-              const rataRataSiswa = totalNilaiSiswa / jumlahKolomSiswa;
-              totalNilaiKelas += rataRataSiswa;
-              jumlahSiswa++;
-
-              if (jumlahSiswa === 1) {
-                nilaiTertinggi = rataRataSiswa;
-                nilaiTerendah = rataRataSiswa;
-              } else {
-                nilaiTertinggi = Math.max(nilaiTertinggi, rataRataSiswa);
-                nilaiTerendah = Math.min(nilaiTerendah, rataRataSiswa);
-              }
-            }
-          }
-        });
-
-        const rataRataKelas = jumlahSiswa > 0 ? (totalNilaiKelas / jumlahSiswa) : 0;
-        let status = '';
-        if (rataRataKelas >= 85) status = '🏆 Sangat Baik';
-        else if (rataRataKelas >= 75) status = '👍 Baik';
-        else if (rataRataKelas >= 65) status = '��️ Cukup';
-        else status = '📚 Perlu Bimbingan';
-
-        if (jumlahSiswa === 0) {
-          nilaiTerendah = 0;
-        }
-
-        summaryData.push([
-          index + 1,
-          kelas.nama,
-          siswaKelas.length,
-          parseFloat(rataRataKelas.toFixed(1)),
-          parseFloat(nilaiTertinggi.toFixed(1)),
-          parseFloat(nilaiTerendah.toFixed(1)),
-          status
-        ]);
-      });
-
-      // Create summary worksheet
-      const summaryWs = XLSX.utils.aoa_to_sheet(summaryData);
-
-      // Set column widths for summary
-      summaryWs['!cols'] = [{
-          wch: 5
-        }, // No
-        {
-          wch: 15
-        }, // Kelas
-        {
-          wch: 15
-        }, // Jumlah Siswa
-        {
-          wch: 15
-        }, // Rata-rata Kelas
-        {
-          wch: 15
-        }, // Nilai Tertinggi
-        {
-          wch: 15
-        }, // Nilai Terendah
-        {
-          wch: 20
-        } // Status
-      ];
-
-      // Style summary sheet
-      const summaryRange = XLSX.utils.decode_range(summaryWs['!ref']);
-
-      // Header styling
-      for (let col = summaryRange.s.c; col <= summaryRange.e.c; col++) {
-        const cellAddress = XLSX.utils.encode_cell({
-          r: 0,
-          c: col
-        });
-        if (!summaryWs[cellAddress]) continue;
-
-        summaryWs[cellAddress].s = {
-          fill: {
-            fgColor: {
-              rgb: "2F5597"
-            }
-          },
-          font: {
-            color: {
-              rgb: "FFFFFF"
-            },
-            bold: true,
-            size: 12
-          },
-          alignment: {
-            horizontal: "center",
-            vertical: "center"
-          },
-          border: {
-            top: {
-              style: "medium",
-              color: {
-                rgb: "000000"
-              }
-            },
-            bottom: {
-              style: "medium",
-              color: {
-                rgb: "000000"
-              }
-            },
-            left: {
-              style: "medium",
-              color: {
-                rgb: "000000"
-              }
-            },
-            right: {
-              style: "medium",
-              color: {
-                rgb: "000000"
-              }
-            }
-          }
-        };
-      }
-
-      // Data styling
-      for (let row = 1; row <= summaryRange.e.r; row++) {
-        for (let col = summaryRange.s.c; col <= summaryRange.e.c; col++) {
-          const cellAddress = XLSX.utils.encode_cell({
-            r: row,
-            c: col
-          });
-          if (!summaryWs[cellAddress]) continue;
-
-          summaryWs[cellAddress].s = {
-            alignment: {
-              horizontal: col === 1 ? "left" : "center",
-              vertical: "center"
-            },
-            border: {
-              top: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              },
-              bottom: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              },
-              left: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              },
-              right: {
-                style: "thin",
-                color: {
-                  rgb: "CCCCCC"
-                }
-              }
-            }
-          };
-
-          // Alternate row colors
-          if (row % 2 === 0) {
-            summaryWs[cellAddress].s.fill = {
-              fgColor: {
-                rgb: "F8F9FA"
-              }
-            };
-          }
-
-          // Color code average grades
-          if (col === 3) { // Rata-rata Kelas column
-            const nilai = parseFloat(summaryWs[cellAddress].v);
-            if (nilai >= 85) {
-              summaryWs[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "C6EFCE"
-                }
-              };
-              summaryWs[cellAddress].s.font = {
-                color: {
-                  rgb: "006100"
-                },
-                bold: true
-              };
-            } else if (nilai >= 75) {
-              summaryWs[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "C6E0FF"
-                }
-              };
-              summaryWs[cellAddress].s.font = {
-                color: {
-                  rgb: "0066CC"
-                },
-                bold: true
-              };
-            } else if (nilai >= 65) {
-              summaryWs[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "FFEB9C"
-                }
-              };
-              summaryWs[cellAddress].s.font = {
-                color: {
-                  rgb: "9C6500"
-                },
-                bold: true
-              };
-            } else {
-              summaryWs[cellAddress].s.fill = {
-                fgColor: {
-                  rgb: "FFC7CE"
-                }
-              };
-              summaryWs[cellAddress].s.font = {
-                color: {
-                  rgb: "9C0006"
-                },
-                bold: true
-              };
-            }
-          }
-        }
-      }
-
-      // Add summary sheet to workbook
-      XLSX.utils.book_append_sheet(wb, summaryWs, 'Rekap Keseluruhan');
-
-      // Generate filename with timestamp
-      const now = new Date();
-      const timestamp = now.toISOString().split('T')[0];
-      const filename = `Laporan_Nilai_${data.currentSemester}_${timestamp}.xlsx`;
-
-      // Write and download file
-      XLSX.writeFile(wb, filename);
-
-      showNotification(`📊 File Excel "${filename}" berhasil diunduh dengan ${data.kelas.length} sheet kelas + rekap keseluruhan!`);
-    }
-
-    function eksporCSV() {
-      let csvContent = "Nama Siswa,Kelas,";
-      csvContent += data.kolomNilai.map(k => k.nama).join(",") + ",Nilai Akhir,Semester\n";
-
-      data.siswa.forEach(siswa => {
-        const kelas = data.kelas.find(k => k.id === siswa.kelasId);
-        const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
-
-        let row = `${siswa.nama},${kelas ? kelas.nama : ''},`;
-
-        let totalNilai = 0;
-        let jumlahKolom = 0;
-
-        data.kolomNilai.forEach(kolom => {
-          const nilaiKolom = nilai ? (nilai[kolom.nama] || 0) : 0;
-          row += `${nilaiKolom},`;
-          totalNilai += parseFloat(nilaiKolom);
-          jumlahKolom++;
-        });
-
-        const nilaiAkhir = jumlahKolom > 0 ? (totalNilai / jumlahKolom).toFixed(1) : 0;
-        row += `${nilaiAkhir},${data.currentSemester}\n`;
-
-        csvContent += row;
-      });
-
-      const blob = new Blob([csvContent], {
-        type: 'text/csv'
-      });
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `nilai_siswa_${data.currentSemester}.csv`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-
-      showNotification('File CSV berhasil diunduh!');
-    }
-
     function updateStatistics() {
       document.getElementById('totalKelas').textContent = data.kelas.length;
       document.getElementById('totalSiswa').textContent = data.siswa.length;
@@ -3212,64 +2544,301 @@
       document.getElementById('rataRata').textContent = totalNilaiCount > 0 ? (totalNilaiSum / totalNilaiCount).toFixed(1) : 0;
     }
 
-    // Reset data functionality
-    function resetAllData() {
-      dataManager.resetAllData();
-    }
-
-    // Helper functions
-    function updateKelasFilters() {
-      const filters = ['kelasFilter', 'kelasNilaiFilter'];
-      filters.forEach(filterId => {
-        const filter = document.getElementById(filterId);
-        if (filter) {
-          const currentValue = filter.value;
-          const placeholder = filterId === 'kelasFilter' ? '📚 Semua Kelas' : '📚 Pilih Kelas';
-          filter.innerHTML = `<option value="">${placeholder}</option>`;
-          data.kelas.forEach(kelas => {
-            filter.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
-          });
-          filter.value = currentValue;
-        }
+    function updateExportOptions() {
+      // Update export kelas select
+      const exportKelasSelect = document.getElementById('exportKelasSelect');
+      const currentValue = exportKelasSelect.value;
+      exportKelasSelect.innerHTML = '<option value="">📚 Semua Kelas</option>';
+      data.kelas.forEach(kelas => {
+        exportKelasSelect.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
       });
-    }
+      exportKelasSelect.value = currentValue;
 
-    function getGradeClass(nilai) {
-      if (nilai >= 85) return 'grade-excellent';
-      if (nilai >= 75) return 'grade-good';
-      if (nilai >= 65) return 'grade-fair';
-      return 'grade-poor';
-    }
+      // Update export nilai checkboxes
+      const checkboxContainer = document.getElementById('exportNilaiCheckboxes');
+      checkboxContainer.innerHTML = '';
 
-    function getGradeText(nilai) {
-      if (nilai >= 85) return '✅ Sangat Baik';
-      if (nilai >= 75) return '👍 Baik';
-      if (nilai >= 65) return '⚠️ Cukup';
-      return '📚 Perlu Bimbingan';
-    }
-
-    // Event listeners
-    document.getElementById('semesterSelect').addEventListener('change', function() {
-      data.currentSemester = this.value;
-      dataManager.saveData();
-      renderDashboard();
-      showNotification(`Beralih ke semester ${this.value}!`);
-    });
-
-    document.getElementById('kelasFilter').addEventListener('change', renderSiswa);
-    document.getElementById('kelasNilaiFilter').addEventListener('change', renderNilai);
-
-    // Close modals when clicking outside
-    document.addEventListener('click', function(event) {
-      if (event.target.classList.contains('modal')) {
-        const modalId = event.target.id;
-        closeModal(modalId);
+      if (data.kolomNilai.length === 0) {
+        checkboxContainer.innerHTML = '<div class="text-sm text-gray-500 text-center py-2">Belum ada jenis nilai</div>';
+      } else {
+        data.kolomNilai.forEach(kolom => {
+          const checkbox = document.createElement('label');
+          checkbox.className = 'flex items-center space-x-2 cursor-pointer hover:bg-gray-100 p-2 rounded-lg';
+          checkbox.innerHTML = `
+                        <input type="checkbox" value="${kolom.nama}" checked class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <span class="text-sm text-gray-700">${kolom.nama} (${kolom.tanggal})</span>
+                    `;
+          checkboxContainer.appendChild(checkbox);
+        });
       }
-    });
+    }
 
-    // Initialize
-    showSection('dashboard');
-    showNotification('Selamat datang di Daftar Nilai Kelas Digital! Data tersimpan otomatis. 🎉');
+    function exportRankingExcel() {
+      const kelasFilter = document.getElementById('exportKelasSelect').value;
+      const tahunAjaran = document.getElementById('exportTahunAjaran').value;
+      const sortType = document.getElementById('exportSortType').value;
+      const judulLaporan = document.getElementById('exportJudulLaporan').value;
+      const tambahNIS = document.getElementById('exportTambahNIS').checked;
+
+      // Get selected nilai types
+      const selectedNilai = Array.from(document.querySelectorAll('#exportNilaiCheckboxes input:checked')).map(cb => cb.value);
+
+      if (selectedNilai.length === 0) {
+        showNotification('Pilih minimal satu jenis nilai!', 'error');
+        return;
+      }
+
+      let students = getRankedStudents(kelasFilter);
+
+      // Sort based on type
+      if (sortType === 'abjad') {
+        students.sort((a, b) => a.nama.localeCompare(b.nama));
+      }
+
+      // Prepare data
+      const headers = ['No'];
+      if (tambahNIS) headers.push('NIS');
+      headers.push('Nama Siswa', 'Kelas');
+      selectedNilai.forEach(n => headers.push(n));
+      headers.push('Rata-rata', 'Keterangan');
+
+      const rows = [headers];
+
+      students.forEach((student, index) => {
+        const siswaData = data.siswa.find(s => s.id === student.siswaId);
+        const nilai = data.nilai.find(n => n.siswaId === student.siswaId && n.semester === data.currentSemester);
+
+        const row = [index + 1];
+        if (tambahNIS) row.push(siswaData.nis || '-');
+        row.push(student.nama, student.kelas ? student.kelas.nama : '-');
+
+        selectedNilai.forEach(kolom => {
+          row.push(nilai && nilai[kolom] !== undefined ? nilai[kolom] : 0);
+        });
+
+        row.push(student.average, getGradeText(student.average));
+        rows.push(row);
+      });
+
+      // Create workbook
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(rows);
+
+      // Add title rows
+      XLSX.utils.sheet_add_aoa(ws, [
+        [judulLaporan],
+        [`Tahun Ajaran: ${tahunAjaran}`],
+        [`Semester: ${data.currentSemester === 'ganjil' ? 'Ganjil' : 'Genap'}`],
+        [`Tanggal Cetak: ${new Date().toLocaleDateString('id-ID')}`],
+        []
+      ], {
+        origin: 'A1'
+      });
+
+      // Merge title cell
+      ws['!merges'] = [{
+        s: {
+          r: 0,
+          c: 0
+        },
+        e: {
+          r: 0,
+          c: headers.length - 1
+        }
+      }];
+
+      // Set column widths
+      const colWidths = [{
+        wch: 5
+      }];
+      if (tambahNIS) colWidths.push({
+        wch: 12
+      });
+      colWidths.push({
+        wch: 25
+      }, {
+        wch: 12
+      });
+      selectedNilai.forEach(() => colWidths.push({
+        wch: 12
+      }));
+      colWidths.push({
+        wch: 12
+      }, {
+        wch: 20
+      });
+      ws['!cols'] = colWidths;
+
+      XLSX.utils.book_append_sheet(wb, ws, 'Ranking Siswa');
+
+      const filename = `Ranking_${judulLaporan.replace(/ /g, '_')}_${new Date().toISOString().split('T')[0]}.xlsx`;
+      XLSX.writeFile(wb, filename);
+
+      showNotification('📊 File Excel berhasil diunduh!', 'success');
+    }
+
+    function exportRankingCSV() {
+      const kelasFilter = document.getElementById('exportKelasSelect').value;
+      const sortType = document.getElementById('exportSortType').value;
+      const judulLaporan = document.getElementById('exportJudulLaporan').value;
+      const tambahNIS = document.getElementById('exportTambahNIS').checked;
+
+      // Get selected nilai types
+      const selectedNilai = Array.from(document.querySelectorAll('#exportNilaiCheckboxes input:checked')).map(cb => cb.value);
+
+      if (selectedNilai.length === 0) {
+        showNotification('Pilih minimal satu jenis nilai!', 'error');
+        return;
+      }
+
+      let students = getRankedStudents(kelasFilter);
+
+      // Sort based on type
+      if (sortType === 'abjad') {
+        students.sort((a, b) => a.nama.localeCompare(b.nama));
+      }
+
+      // Prepare CSV content
+      const headers = ['No'];
+      if (tambahNIS) headers.push('NIS');
+      headers.push('Nama Siswa', 'Kelas');
+      selectedNilai.forEach(n => headers.push(n));
+      headers.push('Rata-rata', 'Keterangan');
+
+      let csv = headers.join(',') + '\n';
+
+      students.forEach((student, index) => {
+        const siswaData = data.siswa.find(s => s.id === student.siswaId);
+        const nilai = data.nilai.find(n => n.siswaId === student.siswaId && n.semester === data.currentSemester);
+
+        const row = [index + 1];
+        if (tambahNIS) row.push(siswaData.nis || '-');
+        row.push(`"${student.nama}"`, student.kelas ? student.kelas.nama : '-');
+
+        selectedNilai.forEach(kolom => {
+          row.push(nilai && nilai[kolom] !== undefined ? nilai[kolom] : 0);
+        });
+
+        row.push(student.average, `"${getGradeText(student.average)}"`);
+        csv += row.join(',') + '\n';
+      });
+
+      // Download CSV
+      const blob = new Blob([csv], {
+        type: 'text/csv;charset=utf-8;'
+      });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Ranking_${judulLaporan.replace(/ /g, '_')}_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+
+      showNotification('📋 File CSV berhasil diunduh!', 'success');
+    }
+
+    function eksporExcel() {
+      const wb = XLSX.utils.book_new();
+
+      // Create summary sheet
+      const summaryData = [
+        ['LAPORAN NILAI SISWA'],
+        ['Tahun Ajaran: 2023/2024'],
+        [`Semester: ${data.currentSemester === 'ganjil' ? 'Ganjil' : 'Genap'}`],
+        [],
+        ['Ringkasan'],
+        ['Total Kelas', data.kelas.length],
+        ['Total Siswa', data.siswa.length],
+        ['Total Jenis Nilai', data.kolomNilai.length]
+      ];
+
+      const summarySheet = XLSX.utils.aoa_to_sheet(summaryData);
+      XLSX.utils.book_append_sheet(wb, summarySheet, 'Ringkasan');
+
+      // Create sheet per kelas
+      data.kelas.forEach(kelas => {
+        const siswaList = data.siswa.filter(s => s.kelasId === kelas.id);
+
+        const headers = ['No', 'NIS', 'Nama Siswa'];
+        data.kolomNilai.forEach(kolom => headers.push(kolom.nama));
+        headers.push('Rata-rata');
+
+        const kelasData = [headers];
+
+        siswaList.forEach((siswa, index) => {
+          const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
+          const row = [index + 1, siswa.nis || '-', siswa.nama];
+
+          data.kolomNilai.forEach(kolom => {
+            row.push(nilai && nilai[kolom.nama] !== undefined ? nilai[kolom.nama] : 0);
+          });
+
+          row.push(calculateStudentAverage(siswa.id));
+          kelasData.push(row);
+        });
+
+        const ws = XLSX.utils.aoa_to_sheet(kelasData);
+        XLSX.utils.book_append_sheet(wb, ws, kelas.nama.replace(/[\/\\?*\[\]]/g, ''));
+      });
+
+      // Download
+      XLSX.writeFile(wb, `Laporan_Nilai_Lengkap_${new Date().toISOString().split('T')[0]}.xlsx`);
+      showNotification('📥 File Excel lengkap berhasil diunduh!', 'success');
+    }
+
+    function eksporCSV() {
+      let csv = 'Kelas,NIS,Nama Siswa';
+      data.kolomNilai.forEach(kolom => {
+        csv += `,${kolom.nama}`;
+      });
+      csv += ',Rata-rata,Semester\n';
+
+      data.siswa.forEach(siswa => {
+        const kelas = data.kelas.find(k => k.id === siswa.kelasId);
+        const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
+
+        csv += `${kelas ? kelas.nama : '-'},${siswa.nis || '-'},"${siswa.nama}"`;
+
+        data.kolomNilai.forEach(kolom => {
+          csv += `,${nilai && nilai[kolom.nama] !== undefined ? nilai[kolom.nama] : 0}`;
+        });
+
+        csv += `,${calculateStudentAverage(siswa.id)},${data.currentSemester}\n`;
+      });
+
+      const blob = new Blob([csv], {
+        type: 'text/csv;charset=utf-8;'
+      });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Laporan_Nilai_CSV_${new Date().toISOString().split('T')[0]}.csv`;
+      link.click();
+
+      showNotification('📥 File CSV berhasil diunduh!', 'success');
+    }
+
+    // Update kelas filters
+    function updateKelasFilters() {
+      // Update siswa kelas filter
+      const kelasFilter = document.getElementById('kelasFilter');
+      if (kelasFilter) {
+        const currentValue = kelasFilter.value;
+        kelasFilter.innerHTML = '<option value="">📚 Semua Kelas</option>';
+        data.kelas.forEach(kelas => {
+          kelasFilter.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
+        });
+        kelasFilter.value = currentValue;
+      }
+
+      // Update nilai kelas filter
+      const kelasNilaiFilter = document.getElementById('kelasNilaiFilter');
+      if (kelasNilaiFilter) {
+        const currentValue = kelasNilaiFilter.value;
+        kelasNilaiFilter.innerHTML = '<option value="">📚 Pilih Kelas</option>';
+        data.kelas.forEach(kelas => {
+          kelasNilaiFilter.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
+        });
+        kelasNilaiFilter.value = currentValue;
+      }
+    }
   </script>
   <script>
     (function() {
@@ -3277,7 +2846,7 @@
         var b = a.contentDocument || a.contentWindow.document;
         if (b) {
           var d = b.createElement('script');
-          d.innerHTML = "window.__CF$cv$params={r:'9aaccf5c72b4f8e4',t:'MTc2NTIwMjY0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+          d.innerHTML = "window.__CF$cv$params={r:'9aad5bfa428bab59',t:'MTc2NTIwODQwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
           b.getElementsByTagName('head')[0].appendChild(d)
         }
       }
