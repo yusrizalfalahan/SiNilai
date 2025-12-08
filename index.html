@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html lang="id" class="h-full">
 
 <head>
   <meta charset="UTF-8">
@@ -165,14 +165,14 @@
     .notification {
       position: fixed;
       top: 20px;
-      right: 20px;
+      right: -400px;
       z-index: 1000;
-      transform: translateX(400px);
-      transition: transform 0.3s ease;
+      transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      max-width: 350px;
     }
 
     .notification.show {
-      transform: translateX(0);
+      right: 20px;
     }
 
     .auto-save-indicator {
@@ -252,214 +252,238 @@
         opacity: 0.5;
       }
     }
+
+    /* Custom scrollbar untuk webkit browsers */
+    nav::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    nav::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+
+    nav::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+
+    nav::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Custom scrollbar untuk Firefox */
+    nav {
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 #f1f5f9;
+    }
   </style>
+  <style>
+    @view-transition {
+      navigation: auto;
+    }
+  </style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
 </head>
 
-<body class="bg-gradient-to-br from-blue-50 via-white to-cyan-50 font-sans">
+<body class="h-full bg-gradient-to-br from-blue-50 via-white to-cyan-50 font-sans">
   <!-- Notification -->
   <div id="notification" class="notification bg-white border-l-4 border-green-500 p-4 rounded-lg shadow-lg">
-    <div class="flex items-center">
-      <span class="text-green-500 text-xl mr-3">✓</span>
-      <span id="notificationText" class="text-gray-800"></span>
+    <div class="flex items-center"><span class="text-green-500 text-xl mr-3">✓</span> <span id="notificationText" class="text-gray-800"></span>
     </div>
-  </div>
-
-  <!-- Auto Save Indicator -->
+  </div><!-- Auto Save Indicator -->
   <div id="autoSaveIndicator" class="auto-save-indicator bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
-    <div class="flex items-center text-sm">
-      <span class="mr-2">💾</span>
-      <span>Data disimpan otomatis</span>
+    <div class="flex items-center text-sm"><span class="mr-2">💾</span> <span>Data disimpan otomatis</span>
     </div>
-  </div>
-
-  <!-- Overlay -->
-  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div>
-
-  <!-- Sidebar -->
-  <div id="sidebar" class="sidebar fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 p-6">
-    <div class="flex items-center justify-between mb-8">
-      <div>
-        <h2 class="text-xl font-bold text-gray-800">📚 Menu Navigasi</h2>
-        <p class="text-sm text-gray-500">Kelola data dengan mudah</p>
-      </div>
-      <button id="closeSidebar" class="text-gray-500 hover:text-gray-700 text-3xl transition-colors">×</button>
-    </div>
-
-    <nav class="space-y-3">
-      <a href="#" onclick="showSection('dashboard')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
-        <span class="text-2xl group-hover:scale-110 transition-transform">🏠</span>
+  </div><!-- Overlay -->
+  <div id="overlay" class="overlay fixed inset-0 bg-black bg-opacity-50 z-40"></div><!-- Sidebar -->
+  <div id="sidebar" class="sidebar fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 flex flex-col">
+    <!-- Header - Fixed -->
+    <div class="flex-shrink-0 p-6 border-b border-gray-200">
+      <div class="flex items-center justify-between">
         <div>
-          <span class="font-medium">Dashboard</span>
+          <h2 class="text-xl font-bold text-gray-800">📚 Menu Navigasi</h2>
+          <p class="text-sm text-gray-500">Kelola data dengan mudah</p>
+        </div><button id="closeSidebar" class="text-gray-500 hover:text-gray-700 text-3xl transition-colors">×</button>
+      </div>
+    </div><!-- Menu - Scrollable -->
+    <nav class="flex-1 overflow-y-auto p-6 space-y-3"><a href="#" onclick="showSection('dashboard')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🏠</span>
+        <div><span class="font-medium">Dashboard</span>
           <p class="text-xs text-gray-500">Halaman utama</p>
         </div>
-      </a>
-      <a href="#" onclick="showSection('kelas')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
-        <span class="text-2xl group-hover:scale-110 transition-transform">🏫</span>
-        <div>
-          <span class="font-medium">Data Kelas</span>
+      </a> <a href="#" onclick="showSection('kelas')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🏫</span>
+        <div><span class="font-medium">Data Kelas</span>
           <p class="text-xs text-gray-500">Kelola kelas sekolah</p>
         </div>
-      </a>
-      <a href="#" onclick="showSection('siswa')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
-        <span class="text-2xl group-hover:scale-110 transition-transform">👨‍🏫</span>
-        <div>
-          <span class="font-medium">Data Siswa</span>
+      </a> <a href="#" onclick="showSection('siswa')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">👨‍🏫</span>
+        <div><span class="font-medium">Data Siswa</span>
           <p class="text-xs text-gray-500">Kelola data siswa</p>
         </div>
-      </a>
-      <a href="#" onclick="showSection('nilai')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
-        <span class="text-2xl group-hover:scale-110 transition-transform">📊</span>
-        <div>
-          <span class="font-medium">Nilai Siswa</span>
+      </a> <a href="#" onclick="showSection('nilai')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">📊</span>
+        <div><span class="font-medium">Nilai Siswa</span>
           <p class="text-xs text-gray-500">Input dan kelola nilai</p>
         </div>
-      </a>
-      <a href="#" onclick="showSection('pencarian')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
-        <span class="text-2xl group-hover:scale-110 transition-transform">🔎</span>
-        <div>
-          <span class="font-medium">Filter Nilai</span>
+      </a> <a href="#" onclick="showSection('dashboard')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🏆</span>
+        <div><span class="font-medium">Ranking Siswa</span>
+          <p class="text-xs text-gray-500">Lihat peringkat nilai</p>
+        </div>
+      </a> <a href="#" onclick="showSection('pencarian')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">🔎</span>
+        <div><span class="font-medium">Filter Nilai</span>
           <p class="text-xs text-gray-500">Cari dan filter nilai</p>
         </div>
-      </a>
-      <a href="#" onclick="showSection('ekspor')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group">
-        <span class="text-2xl group-hover:scale-110 transition-transform">📤</span>
-        <div>
-          <span class="font-medium">Ekspor Data</span>
+      </a> <a href="#" onclick="showSection('ekspor')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">📤</span>
+        <div><span class="font-medium">Ekspor Data</span>
           <p class="text-xs text-gray-500">Unduh laporan nilai</p>
         </div>
-      </a>
-      <a href="#" onclick="resetAllData()" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-red-50 text-gray-700 hover:text-red-600 group">
-        <span class="text-2xl group-hover:scale-110 transition-transform">♻️</span>
-        <div>
-          <span class="font-medium">Reset Data</span>
+      </a> <a href="#" onclick="resetAllData()" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-red-50 text-gray-700 hover:text-red-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">♻️</span>
+        <div><span class="font-medium">Reset Data</span>
           <p class="text-xs text-gray-500">Hapus semua data</p>
         </div>
       </a>
-    </nav>
-
-    <div class="mt-8 p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-200">
-      <h3 class="font-semibold text-blue-900 mb-2">💾 Penyimpanan</h3>
-      <p class="text-sm text-blue-700">Data tersimpan otomatis di browser Anda dan tidak akan hilang saat refresh!</p>
+    </nav><!-- Footer - Fixed -->
+    <div class="flex-shrink-0 p-6 border-t border-gray-200">
+      <div class="p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl border border-blue-200">
+        <h3 class="font-semibold text-blue-900 mb-2">💾 Penyimpanan</h3>
+        <p class="text-sm text-blue-700">Data tersimpan otomatis di browser Anda dan tidak akan hilang saat refresh!</p>
+      </div>
     </div>
-  </div>
-
-  <!-- Detail Panel -->
+  </div><!-- Detail Panel -->
   <div id="detailPanel" class="detail-panel fixed right-0 top-0 h-full w-96 bg-white shadow-2xl z-50 overflow-y-auto">
     <div class="p-6">
       <div class="flex items-center justify-between mb-6">
-        <h3 class="text-xl font-bold text-gray-900">👤 Detail Nilai Siswa</h3>
-        <button onclick="closeDetailPanel()" class="text-gray-500 hover:text-gray-700 text-2xl transition-colors">❌</button>
+        <h3 class="text-xl font-bold text-gray-900">👤 Detail Nilai Siswa</h3><button onclick="closeDetailPanel()" class="text-gray-500 hover:text-gray-700 text-2xl transition-colors">❌</button>
       </div>
       <div id="detailContent">
         <!-- Detail content will be populated here -->
       </div>
     </div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="min-h-full">
+  </div><!-- Main Content -->
+  <div class="h-full">
     <!-- Header -->
     <header class="bg-white/90 backdrop-blur-sm shadow-sm border-b border-gray-200 sticky top-0 z-30">
       <div class="px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
-          <div class="flex items-center space-x-4">
-            <button id="menuToggle" class="text-gray-600 hover:text-blue-600 text-2xl transition-colors hover:scale-110">☰</button>
+          <div class="flex items-center space-x-4"><button id="menuToggle" class="text-gray-600 hover:text-blue-600 text-2xl transition-colors hover:scale-110">☰</button>
             <div>
-              <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                📚 Daftar Nilai Kelas Digital
-              </h1>
+              <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">📚 Daftar Nilai Kelas Digital</h1>
               <p class="text-sm text-gray-500 hidden sm:block">Kelola nilai siswa dengan mudah, cepat, dan efisien</p>
             </div>
           </div>
-          <div class="flex items-center space-x-4">
-            <select id="semesterSelect" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm">
+          <div class="flex items-center space-x-4"><select id="semesterSelect" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white shadow-sm">
               <option value="ganjil">🌙 Semester Ganjil</option>
               <option value="genap">☀️ Semester Genap</option>
             </select>
           </div>
         </div>
       </div>
-    </header>
-
-    <!-- Main Content Area -->
+    </header><!-- Main Content Area -->
     <main class="px-4 sm:px-6 lg:px-8 py-8">
       <!-- Dashboard Section -->
       <div id="dashboardSection" class="section fade-in">
         <div class="text-center mb-12">
           <h2 class="text-4xl font-bold text-gray-900 mb-4">📚 Daftar Nilai Kelas Digital</h2>
-          <p class="text-xl text-gray-600 mb-8">Kelola nilai siswa dengan mudah, cepat, dan efisien</p>
-
-          <!-- Quick Stats -->
+          <p class="text-xl text-gray-600 mb-8">Kelola nilai siswa dengan mudah, cepat, dan efisien</p><!-- Quick Stats -->
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
-              <div class="text-3xl font-bold text-blue-600 mb-2" id="dashTotalKelas">0</div>
-              <div class="text-sm text-gray-600">🏫 Total Kelas</div>
+              <div class="text-3xl font-bold text-blue-600 mb-2" id="dashTotalKelas">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                🏫 Total Kelas
+              </div>
             </div>
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
-              <div class="text-3xl font-bold text-green-600 mb-2" id="dashTotalSiswa">0</div>
-              <div class="text-sm text-gray-600">👨‍🏫 Total Siswa</div>
+              <div class="text-3xl font-bold text-green-600 mb-2" id="dashTotalSiswa">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                👨‍🏫 Total Siswa
+              </div>
             </div>
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
-              <div class="text-3xl font-bold text-purple-600 mb-2" id="dashTotalNilai">0</div>
-              <div class="text-sm text-gray-600">📝 Total Nilai</div>
+              <div class="text-3xl font-bold text-purple-600 mb-2" id="dashTotalNilai">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                📝 Total Nilai
+              </div>
             </div>
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
-              <div class="text-3xl font-bold text-orange-600 mb-2" id="dashRataRata">0</div>
-              <div class="text-sm text-gray-600">🎯 Rata-rata</div>
+              <div class="text-3xl font-bold text-orange-600 mb-2" id="dashRataRata">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                🎯 Rata-rata
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- Quick Actions -->
+        </div><!-- Ranking Section -->
+        <div class="mb-8">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+            <div>
+              <h3 class="text-2xl font-bold text-gray-900">🏆 Peringkat Siswa</h3>
+              <p class="text-gray-600">Urutan berdasarkan rata-rata nilai tertinggi</p>
+            </div>
+            <div class="flex gap-3 mt-4 sm:mt-0"><select id="rankingKelasFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm" onchange="renderDashboard()">
+                <option value="">📚 Semua Kelas</option>
+              </select> <select id="rankingCountFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm" onchange="renderDashboard()">
+                <option value="10">Top 10</option>
+                <option value="20">Top 20</option>
+                <option value="50">Top 50</option>
+                <option value="all">Semua</option>
+              </select>
+            </div>
+          </div><!-- Top 3 Podium -->
+          <div id="podiumContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Podium will be rendered here -->
+          </div>
+        </div><!-- Quick Actions -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-2xl border border-blue-200">
             <div class="text-center">
-              <div class="text-4xl mb-4">🏫</div>
+              <div class="text-4xl mb-4">
+                🏫
+              </div>
               <h3 class="text-lg font-semibold text-blue-900 mb-2">Kelola Kelas</h3>
-              <p class="text-blue-700 text-sm mb-4">Tambah dan atur kelas sekolah</p>
-              <button onclick="showSection('kelas')" class="btn-primary text-white px-6 py-2 rounded-xl font-medium w-full">
-                Buka Kelas
-              </button>
+              <p class="text-blue-700 text-sm mb-4">Tambah dan atur kelas sekolah</p><button onclick="showSection('kelas')" class="btn-primary text-white px-6 py-2 rounded-xl font-medium w-full"> Buka Kelas </button>
             </div>
           </div>
-
           <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-2xl border border-green-200">
             <div class="text-center">
-              <div class="text-4xl mb-4">👨‍🏫</div>
+              <div class="text-4xl mb-4">
+                👨‍🏫
+              </div>
               <h3 class="text-lg font-semibold text-green-900 mb-2">Data Siswa</h3>
-              <p class="text-green-700 text-sm mb-4">Kelola informasi siswa</p>
-              <button onclick="showSection('siswa')" class="btn-success text-white px-6 py-2 rounded-xl font-medium w-full">
-                Buka Siswa
-              </button>
+              <p class="text-green-700 text-sm mb-4">Kelola informasi siswa</p><button onclick="showSection('siswa')" class="btn-success text-white px-6 py-2 rounded-xl font-medium w-full"> Buka Siswa </button>
             </div>
           </div>
-
           <div class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-2xl border border-purple-200">
             <div class="text-center">
-              <div class="text-4xl mb-4">📊</div>
+              <div class="text-4xl mb-4">
+                📊
+              </div>
               <h3 class="text-lg font-semibold text-purple-900 mb-2">Input Nilai</h3>
-              <p class="text-purple-700 text-sm mb-4">Masukkan dan kelola nilai</p>
-              <button onclick="showSection('nilai')" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-2 rounded-xl font-medium w-full transition-all">
-                Buka Nilai
-              </button>
+              <p class="text-purple-700 text-sm mb-4">Masukkan dan kelola nilai</p><button onclick="showSection('nilai')" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-2 rounded-xl font-medium w-full transition-all"> Buka Nilai </button>
             </div>
           </div>
-        </div>
-
-        <!-- Recent Activity -->
+        </div><!-- Ranking Table -->
         <div class="table-container">
           <div class="p-6 border-b border-gray-200">
-            <h3 class="text-lg font-semibold text-gray-900">📋 Ringkasan Data Siswa</h3>
-            <p class="text-gray-600 text-sm">Daftar siswa dan nilai rata-rata terbaru</p>
+            <h3 class="text-lg font-semibold text-gray-900">📋 Daftar Peringkat Lengkap</h3>
+            <p class="text-gray-600 text-sm">Urutan siswa berdasarkan nilai rata-rata tertinggi ke terendah</p>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full">
               <thead class="bg-gray-50">
                 <tr>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Peringkat</th>
                   <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Siswa</th>
                   <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kelas</th>
                   <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Semester</th>
                   <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rata-rata</th>
+                  <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                   <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detail</th>
                 </tr>
               </thead>
@@ -469,45 +493,29 @@
             </table>
           </div>
         </div>
-      </div>
-
-      <!-- Kelas Section -->
+      </div><!-- Kelas Section -->
       <div id="kelasSection" class="section hidden">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
             <h2 class="text-3xl font-bold text-gray-900 mb-2">🏫 Manajemen Kelas</h2>
             <p class="text-gray-600">Kelola data kelas sekolah dengan mudah</p>
-          </div>
-          <button onclick="openModal('kelasModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg mt-4 sm:mt-0">
-            ➕ Tambah Kelas Baru
-          </button>
+          </div><button onclick="openModal('kelasModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg mt-4 sm:mt-0"> ➕ Tambah Kelas Baru </button>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="kelasContainer">
           <!-- Kelas cards will be populated here -->
         </div>
-      </div>
-
-      <!-- Siswa Section -->
+      </div><!-- Siswa Section -->
       <div id="siswaSection" class="section hidden">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
             <h2 class="text-3xl font-bold text-gray-900 mb-2">👨‍🏫 Data Siswa</h2>
             <p class="text-gray-600">Kelola informasi siswa di setiap kelas</p>
           </div>
-          <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0">
-            <select id="kelasFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
+          <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0"><select id="kelasFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
               <option value="">📚 Semua Kelas</option>
-            </select>
-            <button onclick="importSiswa()" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg">
-              📥 Import Excel
-            </button>
-            <button onclick="openModal('siswaModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg">
-              ➕ Tambah Siswa
-            </button>
+            </select> <button onclick="importSiswa()" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg"> 📥 Import Excel </button> <button onclick="openModal('siswaModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg"> ➕ Tambah Siswa </button>
           </div>
         </div>
-
         <div class="table-container">
           <div class="overflow-x-auto">
             <table class="w-full">
@@ -525,31 +533,23 @@
             </table>
           </div>
         </div>
-      </div>
-
-      <!-- Nilai Section -->
+      </div><!-- Nilai Section -->
       <div id="nilaiSection" class="section hidden">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8">
           <div>
             <h2 class="text-3xl font-bold text-gray-900 mb-2">📊 Nilai Siswa</h2>
             <p class="text-gray-600">Input dan kelola nilai dengan sistem perhitungan otomatis</p>
           </div>
-          <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0">
-            <select id="kelasNilaiFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
+          <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0"><select id="kelasNilaiFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
               <option value="">📚 Pilih Kelas</option>
-            </select>
-            <button onclick="openModal('kolomModal')" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg">
-              ➕ Tambah Kolom
-            </button>
+            </select> <button onclick="openModal('kolomModal')" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg"> ➕ Tambah Kolom </button>
           </div>
         </div>
-
         <div class="table-container overflow-x-auto">
           <table class="w-full min-w-max">
             <thead class="bg-gray-50">
               <tr id="nilaiTableHeader">
-                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50">Nama Siswa</th>
-                <!-- Dynamic columns will be added here -->
+                <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sticky left-0 bg-gray-50">Nama Siswa</th><!-- Dynamic columns will be added here -->
                 <th class="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nilai Akhir (%)</th>
               </tr>
             </thead>
@@ -558,52 +558,33 @@
             </tbody>
           </table>
         </div>
-      </div>
-
-      <!-- Pencarian Section -->
+      </div><!-- Pencarian Section -->
       <div id="pencarianSection" class="section hidden">
         <div class="mb-8">
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">🔎 Filter & Pencarian Nilai</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-2">🔎 Filter &amp; Pencarian Nilai</h2>
           <p class="text-gray-600">Cari dan filter data nilai berdasarkan kriteria tertentu</p>
-        </div>
-
-        <!-- Filter Form -->
+        </div><!-- Filter Form -->
         <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 mb-8">
           <h3 class="text-lg font-semibold text-gray-900 mb-6">🔍 Filter Data</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Mulai</label>
-              <input type="date" id="tanggalMulai" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Mulai</label> <input type="date" id="tanggalMulai" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Akhir</label>
-              <input type="date" id="tanggalAkhir" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Akhir</label> <input type="date" id="tanggalAkhir" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">👤 Nama Siswa</label>
-              <input type="text" id="filterNamaSiswa" placeholder="Cari nama siswa..." class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">👤 Nama Siswa</label> <input type="text" id="filterNamaSiswa" placeholder="Cari nama siswa..." class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">🏫 Kelas</label>
-              <select id="filterKelas" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">🏫 Kelas</label> <select id="filterKelas" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
                 <option value="">Semua Kelas</option>
               </select>
             </div>
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">📝 Jenis Nilai</label>
-              <select id="filterJenisNilai" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">📝 Jenis Nilai</label> <select id="filterJenisNilai" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
                 <option value="">Semua Jenis</option>
               </select>
             </div>
-            <div class="flex items-end">
-              <button onclick="applyFilter()" class="btn-primary w-full text-white px-6 py-3 rounded-xl font-medium shadow-lg">
-                🔍 Terapkan Filter
-              </button>
+            <div class="flex items-end"><button onclick="applyFilter()" class="btn-primary w-full text-white px-6 py-3 rounded-xl font-medium shadow-lg"> 🔍 Terapkan Filter </button>
             </div>
           </div>
-        </div>
-
-        <!-- Filter Results -->
+        </div><!-- Filter Results -->
         <div id="filterResults" class="hidden">
           <div class="table-container">
             <div class="p-6 border-b border-gray-200">
@@ -628,207 +609,198 @@
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- Ekspor Section -->
+      </div><!-- Ekspor Section -->
       <div id="eksporSection" class="section hidden">
         <div class="mb-8">
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">📤 Ekspor & Laporan Nilai</h2>
+          <h2 class="text-3xl font-bold text-gray-900 mb-2">📤 Ekspor &amp; Laporan Nilai</h2>
           <p class="text-gray-600">Unduh laporan nilai dalam berbagai format</p>
+        </div><!-- Export Ranking Form -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
+          <div class="text-center mb-6">
+            <div class="text-5xl mb-3">
+              🏆
+            </div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">Export Ranking Siswa</h3>
+            <p class="text-gray-600">Unduh daftar peringkat siswa dengan filter kustom</p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">🏫 Pilih Kelas</label> <select id="exportKelasSelect" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="">📚 Semua Kelas</option>
+              </select>
+            </div>
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">📅 Tahun Ajaran</label> <input type="text" id="exportTahunAjaran" placeholder="Contoh: 2023/2024" value="2023/2024" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white">
+            </div>
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">📊 Urutan Data</label> <select id="exportSortType" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="ranking">🏆 Berdasarkan Ranking (Nilai Tertinggi)</option>
+                <option value="abjad">🔤 Berdasarkan Abjad (A-Z)</option>
+              </select>
+            </div>
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">📝 Jenis Nilai</label>
+              <div id="exportNilaiCheckboxes" class="space-y-2 border border-gray-300 rounded-xl p-4 max-h-48 overflow-y-auto bg-gray-50">
+                <!-- Checkboxes will be populated here -->
+              </div>
+            </div>
+            <div class="md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-2">📋 Judul Laporan</label> <input type="text" id="exportJudulLaporan" placeholder="Contoh: Daftar Nilai UTS" value="Daftar Nilai Semester" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white mb-3"> <label class="block text-sm font-medium text-gray-700 mb-2">🔢 Tambahkan NIS</label>
+              <div class="flex items-center space-x-3"><label class="flex items-center cursor-pointer"> <input type="checkbox" id="exportTambahNIS" checked class="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"> <span class="ml-2 text-sm text-gray-700">Sertakan kolom NIS</span> </label>
+              </div>
+            </div>
+          </div>
+          <div class="flex gap-4"><button onclick="exportRankingExcel()" class="flex-1 btn-primary text-white px-8 py-4 rounded-xl font-medium shadow-lg"> 📊 Export ke Excel </button> <button onclick="exportRankingCSV()" class="flex-1 btn-success text-white px-8 py-4 rounded-xl font-medium shadow-lg"> 📋 Export ke CSV </button>
+          </div>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl border border-blue-200">
             <div class="text-center">
-              <div class="text-6xl mb-4">📊</div>
-              <h3 class="text-xl font-semibold text-blue-900 mb-4">Ekspor ke Excel</h3>
+              <div class="text-6xl mb-4">
+                📊
+              </div>
+              <h3 class="text-xl font-semibold text-blue-900 mb-4">Ekspor Lengkap (Excel)</h3>
               <p class="text-blue-700 mb-6">Unduh laporan lengkap dengan sheet terpisah per kelas, format otomatis rapi, dan rekap keseluruhan</p>
               <div class="text-sm text-blue-600 mb-4">
                 ✅ Sheet per kelas<br>
                 ✅ Format tabel otomatis<br>
                 ✅ Rekap keseluruhan<br>
                 ✅ Color coding nilai
-              </div>
-              <button onclick="eksporExcel()" class="btn-primary text-white px-8 py-4 rounded-xl font-medium shadow-lg w-full">
-                📥 Download Excel
-              </button>
+              </div><button onclick="eksporExcel()" class="btn-primary text-white px-8 py-4 rounded-xl font-medium shadow-lg w-full"> 📥 Download Excel Lengkap </button>
             </div>
           </div>
-
           <div class="card-hover bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl border border-green-200">
             <div class="text-center">
-              <div class="text-6xl mb-4">📋</div>
-              <h3 class="text-xl font-semibold text-green-900 mb-4">Ekspor ke CSV</h3>
-              <p class="text-green-700 mb-6">Unduh data nilai dalam format CSV untuk Google Sheets dan aplikasi lainnya</p>
-              <button onclick="eksporCSV()" class="btn-success text-white px-8 py-4 rounded-xl font-medium shadow-lg w-full">
-                📥 Download CSV
-              </button>
+              <div class="text-6xl mb-4">
+                📋
+              </div>
+              <h3 class="text-xl font-semibold text-green-900 mb-4">Ekspor Semua Nilai (CSV)</h3>
+              <p class="text-green-700 mb-6">Unduh semua data nilai dalam format CSV untuk Google Sheets dan aplikasi lainnya</p><button onclick="eksporCSV()" class="btn-success text-white px-8 py-4 rounded-xl font-medium shadow-lg w-full"> 📥 Download CSV Lengkap </button>
             </div>
           </div>
-        </div>
-
-        <!-- Statistics -->
+        </div><!-- Statistics -->
         <div class="stats-card p-8 rounded-2xl">
           <h4 class="text-xl font-semibold text-gray-900 mb-6 text-center">📊 Ringkasan Data Sekolah</h4>
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="text-center">
-              <div class="text-4xl font-bold text-blue-600 mb-2" id="totalKelas">0</div>
-              <div class="text-sm text-gray-600">🏫 Total Kelas</div>
+              <div class="text-4xl font-bold text-blue-600 mb-2" id="totalKelas">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                🏫 Total Kelas
+              </div>
             </div>
             <div class="text-center">
-              <div class="text-4xl font-bold text-green-600 mb-2" id="totalSiswa">0</div>
-              <div class="text-sm text-gray-600">👨‍🏫 Total Siswa</div>
+              <div class="text-4xl font-bold text-green-600 mb-2" id="totalSiswa">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                👨‍🏫 Total Siswa
+              </div>
             </div>
             <div class="text-center">
-              <div class="text-4xl font-bold text-purple-600 mb-2" id="totalNilai">0</div>
-              <div class="text-sm text-gray-600">📝 Total Nilai</div>
+              <div class="text-4xl font-bold text-purple-600 mb-2" id="totalNilai">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                📝 Total Nilai
+              </div>
             </div>
             <div class="text-center">
-              <div class="text-4xl font-bold text-orange-600 mb-2" id="rataRata">0</div>
-              <div class="text-sm text-gray-600">🎯 Rata-rata</div>
+              <div class="text-4xl font-bold text-orange-600 mb-2" id="rataRata">
+                0
+              </div>
+              <div class="text-sm text-gray-600">
+                🎯 Rata-rata
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
-
-    <!-- Footer -->
+    </main><!-- Footer -->
     <footer class="bg-white/90 backdrop-blur-sm border-t border-gray-200 py-6 mt-12">
       <div class="px-4 sm:px-6 lg:px-8">
-        <p class="text-center text-gray-600">
-          ✨ Dibuat untuk kemudahan guru mengelola nilai siswa dengan teknologi modern
-        </p>
+        <p class="text-center text-gray-600">✨ Dibuat untuk kemudahan guru mengelola nilai siswa dengan teknologi modern</p>
       </div>
     </footer>
-  </div>
-
-  <!-- Modals -->
+  </div><!-- Modals -->
   <!-- Kelas Modal -->
   <div id="kelasModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
       <div class="text-center mb-6">
-        <div class="text-5xl mb-4">🏫</div>
+        <div class="text-5xl mb-4">
+          🏫
+        </div>
         <h3 class="text-2xl font-bold text-gray-900" id="kelasModalTitle">Tambah Kelas Baru</h3>
         <p class="text-gray-600">Masukkan informasi kelas</p>
-      </div>
-
-      <!-- Progress Bar -->
+      </div><!-- Progress Bar -->
       <div class="form-progress mb-6">
         <div class="form-progress-bar" id="kelasProgress" style="width: 0%"></div>
       </div>
-
-      <form id="kelasForm" onsubmit="submitKelas(event)">
-        <input type="hidden" id="kelasId" value="">
+      <form id="kelasForm" onsubmit="submitKelas(event)"><input type="hidden" id="kelasId" value="">
         <div class="space-y-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">📘 Nama Kelas</label>
-            <input type="text" id="namaKelas" placeholder="Contoh: X IPA 1" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('kelas')">
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">📘 Nama Kelas</label> <input type="text" id="namaKelas" placeholder="Contoh: X IPA 1" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('kelas')">
           </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">🎓 Tingkat</label>
-            <select id="tingkatKelas" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('kelas')">
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">🎓 Tingkat</label> <select id="tingkatKelas" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('kelas')">
               <option value="">Pilih Tingkat</option>
-              <option value="X">Kelas 7</option>
-              <option value="XI">Kelas 8</option>
-              <option value="XII">Kelas 9</option>
+              <option value="X">Kelas X</option>
+              <option value="XI">Kelas XI</option>
+              <option value="XII">Kelas XII</option>
             </select>
           </div>
         </div>
-
-        <div class="flex space-x-4 mt-8">
-          <button type="button" onclick="closeModal('kelasModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors">
-            Batal
-          </button>
-          <button type="submit" class="btn-primary flex-1 text-white px-6 py-3 rounded-xl font-medium">
-            ✨ Simpan Kelas
-          </button>
+        <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('kelasModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" class="btn-primary flex-1 text-white px-6 py-3 rounded-xl font-medium"> ✨ Simpan Kelas </button>
         </div>
       </form>
     </div>
-  </div>
-
-  <!-- Siswa Modal -->
+  </div><!-- Siswa Modal -->
   <div id="siswaModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
       <div class="text-center mb-6">
-        <div class="text-5xl mb-4">👨‍🏫</div>
+        <div class="text-5xl mb-4">
+          👨‍🏫
+        </div>
         <h3 class="text-2xl font-bold text-gray-900" id="siswaModalTitle">Tambah Siswa Baru</h3>
         <p class="text-gray-600">Masukkan data siswa</p>
-      </div>
-
-      <!-- Progress Bar -->
+      </div><!-- Progress Bar -->
       <div class="form-progress mb-6">
         <div class="form-progress-bar" id="siswaProgress" style="width: 0%"></div>
       </div>
-
-      <form id="siswaForm" onsubmit="submitSiswa(event)">
-        <input type="hidden" id="siswaId" value="">
+      <form id="siswaForm" onsubmit="submitSiswa(event)"><input type="hidden" id="siswaId" value="">
         <div class="space-y-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">👤 Nama Siswa</label>
-            <input type="text" id="namaSiswa" placeholder="Masukkan nama lengkap" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('siswa')">
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">🔢 NIS (Nomor Induk Siswa)</label> <input type="text" id="nisSiswa" placeholder="Masukkan NIS" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('siswa')">
           </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">🏫 Kelas</label>
-            <select id="kelasSiswa" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('siswa')">
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">👤 Nama Siswa</label> <input type="text" id="namaSiswa" placeholder="Masukkan nama lengkap" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('siswa')">
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">🏫 Kelas</label> <select id="kelasSiswa" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('siswa')">
               <option value="">Pilih Kelas</option>
             </select>
           </div>
         </div>
-
-        <div class="flex space-x-4 mt-8">
-          <button type="button" onclick="closeModal('siswaModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors">
-            Batal
-          </button>
-          <button type="submit" class="btn-primary flex-1 text-white px-6 py-3 rounded-xl font-medium">
-            ➕ Simpan Siswa
-          </button>
+        <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('siswaModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" class="btn-primary flex-1 text-white px-6 py-3 rounded-xl font-medium"> ➕ Simpan Siswa </button>
         </div>
       </form>
     </div>
-  </div>
-
-  <!-- Kolom Modal -->
+  </div><!-- Kolom Modal -->
   <div id="kolomModal" class="modal fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8">
       <div class="text-center mb-6">
-        <div class="text-5xl mb-4">📊</div>
+        <div class="text-5xl mb-4">
+          📊
+        </div>
         <h3 class="text-2xl font-bold text-gray-900">Tambah Kolom Nilai</h3>
         <p class="text-gray-600">Buat jenis penilaian baru</p>
-      </div>
-
-      <!-- Progress Bar -->
+      </div><!-- Progress Bar -->
       <div class="form-progress mb-6">
         <div class="form-progress-bar" id="kolomProgress" style="width: 0%"></div>
       </div>
-
       <form id="kolomForm" onsubmit="submitKolom(event)">
         <div class="space-y-6">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">📝 Nama Jenis Nilai</label>
-            <input type="text" id="namaKolom" placeholder="Contoh: Tugas 2, Quiz, Proyek" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('kolom')">
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">📝 Nama Jenis Nilai</label> <input type="text" id="namaKolom" placeholder="Contoh: Tugas 2, Quiz, Proyek" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('kolom')">
           </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Penilaian</label>
-            <input type="date" id="tanggalKolom" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('kolom')">
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">🗓️ Tanggal Penilaian</label> <input type="date" id="tanggalKolom" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('kolom')">
           </div>
         </div>
-
-        <div class="flex space-x-4 mt-8">
-          <button type="button" onclick="closeModal('kolomModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors">
-            Batal
-          </button>
-          <button type="submit" class="btn-success flex-1 text-white px-6 py-3 rounded-xl font-medium">
-            ➕ Tambah Kolom
-          </button>
+        <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('kolomModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" class="btn-success flex-1 text-white px-6 py-3 rounded-xl font-medium"> ➕ Tambah Kolom </button>
         </div>
       </form>
     </div>
   </div>
-
   <script>
     // Data Storage with localStorage
     class DataManager {
@@ -872,37 +844,44 @@
           siswa: [{
               id: 1,
               nama: 'Ahmad Rizki Pratama',
-              kelasId: 1
+              kelasId: 1,
+              nis: '2023001'
             },
             {
               id: 2,
               nama: 'Siti Nurhaliza Putri',
-              kelasId: 1
+              kelasId: 1,
+              nis: '2023002'
             },
             {
               id: 3,
               nama: 'Budi Santoso',
-              kelasId: 1
+              kelasId: 1,
+              nis: '2023003'
             },
             {
               id: 4,
               nama: 'Dewi Sartika',
-              kelasId: 2
+              kelasId: 2,
+              nis: '2023004'
             },
             {
               id: 5,
               nama: 'Eko Prasetyo',
-              kelasId: 2
+              kelasId: 2,
+              nis: '2023005'
             },
             {
               id: 6,
               nama: 'Fatimah Zahra',
-              kelasId: 3
+              kelasId: 3,
+              nis: '2023006'
             },
             {
               id: 7,
               nama: 'Galih Pratama',
-              kelasId: 3
+              kelasId: 3,
+              nis: '2023007'
             }
           ],
           nilai: [{
@@ -1054,7 +1033,8 @@
         if (document.getElementById('namaKelas').value) filledFields++;
         if (document.getElementById('tingkatKelas').value) filledFields++;
       } else if (formType === 'siswa') {
-        totalFields = 2;
+        totalFields = 3;
+        if (document.getElementById('nisSiswa').value) filledFields++;
         if (document.getElementById('namaSiswa').value) filledFields++;
         if (document.getElementById('kelasSiswa').value) filledFields++;
       } else if (formType === 'kolom') {
@@ -1098,6 +1078,7 @@
         if (editData) {
           document.getElementById('siswaModalTitle').textContent = 'Edit Data Siswa';
           document.getElementById('siswaId').value = editData.id;
+          document.getElementById('nisSiswa').value = editData.nis || '';
           document.getElementById('namaSiswa').value = editData.nama;
           document.getElementById('kelasSiswa').value = editData.kelasId;
           updateFormProgress('siswa');
@@ -1284,50 +1265,113 @@
           break;
         case 'ekspor':
           updateStatistics();
+          updateExportOptions();
           break;
       }
 
       closeSidebar();
     }
 
+    // Calculate student average
+    function calculateStudentAverage(siswaId) {
+      const nilai = data.nilai.find(n => n.siswaId === siswaId && n.semester === data.currentSemester);
+
+      if (!nilai) return 0;
+
+      let totalNilai = 0;
+      let jumlahKolom = 0;
+
+      data.kolomNilai.forEach(kolom => {
+        if (nilai[kolom.nama] !== undefined && nilai[kolom.nama] > 0) {
+          totalNilai += parseFloat(nilai[kolom.nama]);
+          jumlahKolom++;
+        }
+      });
+
+      return jumlahKolom > 0 ? parseFloat((totalNilai / jumlahKolom).toFixed(1)) : 0;
+    }
+
+    // Get ranked students
+    function getRankedStudents(kelasFilter = '') {
+      let filteredSiswa = data.siswa;
+
+      if (kelasFilter) {
+        filteredSiswa = data.siswa.filter(s => s.kelasId == kelasFilter);
+      }
+
+      // Calculate averages and create ranking array
+      const rankedStudents = filteredSiswa.map(siswa => {
+        const kelas = data.kelas.find(k => k.id === siswa.kelasId);
+        const average = calculateStudentAverage(siswa.id);
+
+        return {
+          siswaId: siswa.id,
+          nama: siswa.nama,
+          kelas: kelas,
+          average: average
+        };
+      });
+
+      // Sort by average (highest to lowest), then by name for ties
+      rankedStudents.sort((a, b) => {
+        if (b.average !== a.average) {
+          return b.average - a.average;
+        }
+        return a.nama.localeCompare(b.nama);
+      });
+
+      return rankedStudents;
+    }
+
     // Dashboard functionality
     function renderDashboard() {
       updateDashboardStats();
+      updateRankingKelasFilter();
 
+      const kelasFilter = document.getElementById('rankingKelasFilter').value;
+      const countFilter = document.getElementById('rankingCountFilter').value;
+
+      const rankedStudents = getRankedStudents(kelasFilter);
+
+      // Render podium (top 3)
+      renderPodium(rankedStudents.slice(0, 3));
+
+      // Render table
       const tbody = document.getElementById('dashboardTableBody');
       tbody.innerHTML = '';
 
-      data.siswa.forEach(siswa => {
-        const kelas = data.kelas.find(k => k.id === siswa.kelasId);
-        const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
+      const displayCount = countFilter === 'all' ? rankedStudents.length : parseInt(countFilter);
+      const displayStudents = rankedStudents.slice(0, displayCount);
 
-        let nilaiRataRata = 0;
-        if (nilai) {
-          let totalNilai = 0;
-          let jumlahKolom = 0;
+      displayStudents.forEach((student, index) => {
+        const rank = index + 1;
+        const gradeClass = getGradeClass(student.average);
+        const gradeText = getGradeText(student.average);
 
-          data.kolomNilai.forEach(kolom => {
-            if (nilai[kolom.nama] !== undefined && nilai[kolom.nama] > 0) {
-              totalNilai += parseFloat(nilai[kolom.nama]);
-              jumlahKolom++;
-            }
-          });
-
-          nilaiRataRata = jumlahKolom > 0 ? (totalNilai / jumlahKolom).toFixed(1) : 0;
-        }
-
-        const gradeClass = getGradeClass(nilaiRataRata);
-        const gradeText = getGradeText(nilaiRataRata);
+        // Medal for top 3
+        let rankDisplay = rank;
+        if (rank === 1) rankDisplay = '🥇 1';
+        else if (rank === 2) rankDisplay = '🥈 2';
+        else if (rank === 3) rankDisplay = '🥉 3';
 
         const row = document.createElement('tr');
         row.className = 'hover:bg-gray-50 transition-colors';
+
+        // Highlight top 3
+        if (rank <= 3) {
+          row.className += ' bg-gradient-to-r from-yellow-50 to-amber-50';
+        }
+
         row.innerHTML = `
                     <td class="px-6 py-4">
-                        <div class="font-medium text-gray-900">${siswa.nama}</div>
+                        <div class="text-lg font-bold text-gray-900">${rankDisplay}</div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="font-medium text-gray-900">${student.nama}</div>
                     </td>
                     <td class="px-6 py-4">
                         <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            ${kelas ? kelas.nama : 'Tidak ada'}
+                            ${student.kelas ? student.kelas.nama : 'Tidak ada'}
                         </span>
                     </td>
                     <td class="px-6 py-4">
@@ -1336,21 +1380,119 @@
                         </span>
                     </td>
                     <td class="px-6 py-4">
-                        <div class="flex items-center space-x-2">
-                            <span class="font-bold ${gradeClass} px-3 py-1 rounded-lg text-sm">
-                                ${nilaiRataRata}
-                            </span>
-                            <span class="text-xs text-gray-500">${gradeText}</span>
+                        <div class="font-bold text-2xl ${gradeClass.replace('grade-', 'text-').replace('excellent', 'green-600').replace('good', 'blue-600').replace('fair', 'yellow-600').replace('poor', 'red-600')}">
+                            ${student.average}
                         </div>
                     </td>
                     <td class="px-6 py-4">
-                        <button onclick="showDetailPanel(${siswa.id})" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all">
+                        <span class="${gradeClass} px-3 py-1.5 rounded-lg text-xs font-medium">
+                            ${gradeText}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <button onclick="showDetailPanel(${student.siswaId})" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-3 py-1.5 rounded-lg font-medium text-sm transition-all">
                             🔍 Detail
                         </button>
                     </td>
                 `;
         tbody.appendChild(row);
       });
+
+      if (displayStudents.length === 0) {
+        tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="px-6 py-12 text-center text-gray-500">
+                            <div class="text-4xl mb-4">📚</div>
+                            <div class="text-lg">Belum ada data siswa</div>
+                            <div class="text-sm">Tambahkan siswa dan nilai untuk melihat peringkat</div>
+                        </td>
+                    </tr>
+                `;
+      }
+    }
+
+    // Render podium for top 3
+    function renderPodium(topStudents) {
+      const podiumContainer = document.getElementById('podiumContainer');
+      podiumContainer.innerHTML = '';
+
+      if (topStudents.length === 0) {
+        podiumContainer.innerHTML = `
+                    <div class="col-span-3 text-center py-12 text-gray-500">
+                        <div class="text-4xl mb-4">🏆</div>
+                        <div class="text-lg">Belum ada data peringkat</div>
+                        <div class="text-sm">Tambahkan nilai siswa untuk melihat podium pemenang</div>
+                    </div>
+                `;
+        return;
+      }
+
+      // Arrange podium: 2nd, 1st, 3rd
+      const podiumOrder = [
+        topStudents[1] || null, // 2nd place (left)
+        topStudents[0] || null, // 1st place (center)
+        topStudents[2] || null // 3rd place (right)
+      ];
+
+      const medals = ['🥈', '🥇', '🥉'];
+      const heights = ['h-56', 'h-72', 'h-48'];
+      const gradients = [
+        'from-gray-100 to-gray-200 border-gray-300',
+        'from-yellow-100 to-amber-200 border-yellow-400',
+        'from-orange-100 to-orange-200 border-orange-300'
+      ];
+      const positions = ['2', '1', '3'];
+
+      podiumOrder.forEach((student, index) => {
+        if (!student) {
+          podiumContainer.innerHTML += `
+                        <div class="flex flex-col items-center">
+                            <div class="bg-gradient-to-b ${gradients[index]} border-2 rounded-2xl p-6 w-full ${heights[index]} flex flex-col justify-center items-center opacity-50">
+                                <div class="text-4xl mb-2">${medals[index]}</div>
+                                <div class="text-sm text-gray-500">Posisi ${positions[index]}</div>
+                                <div class="text-xs text-gray-400 mt-2">Belum ada</div>
+                            </div>
+                        </div>
+                    `;
+          return;
+        }
+
+        const gradeClass = getGradeClass(student.average);
+        const gradeText = getGradeText(student.average);
+
+        podiumContainer.innerHTML += `
+                    <div class="flex flex-col items-center slide-in" style="animation-delay: ${index * 0.1}s">
+                        <div class="mb-4 text-center">
+                            <div class="text-6xl mb-2">${medals[index]}</div>
+                            <div class="text-3xl font-bold text-gray-900">${student.average}</div>
+                            <div class="text-sm ${gradeClass.replace('grade-', 'text-').replace('excellent', 'green-600').replace('good', 'blue-600').replace('fair', 'yellow-600').replace('poor', 'red-600')} font-semibold">
+                                ${gradeText}
+                            </div>
+                        </div>
+                        <div class="card-hover bg-gradient-to-b ${gradients[index]} border-2 rounded-2xl p-6 w-full ${heights[index]} flex flex-col justify-center items-center cursor-pointer" onclick="showDetailPanel(${student.siswaId})">
+                            <div class="text-center">
+                                <div class="text-5xl mb-3">👤</div>
+                                <div class="font-bold text-gray-900 text-lg mb-2">${student.nama}</div>
+                                <div class="text-sm text-gray-600 mb-3">${student.kelas ? student.kelas.nama : 'Tidak ada'}</div>
+                                <div class="text-xs text-gray-500 bg-white bg-opacity-50 px-3 py-1 rounded-full">
+                                    Peringkat ${positions[index]}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+      });
+    }
+
+    // Update ranking kelas filter
+    function updateRankingKelasFilter() {
+      const filter = document.getElementById('rankingKelasFilter');
+      const currentValue = filter.value;
+      filter.innerHTML = '<option value="">📚 Semua Kelas</option>';
+      data.kelas.forEach(kelas => {
+        filter.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
+      });
+      filter.value = currentValue;
     }
 
     function updateDashboardStats() {
@@ -1504,6 +1646,7 @@
 
     function submitSiswa(event) {
       event.preventDefault();
+      const nis = document.getElementById('nisSiswa').value;
       const nama = document.getElementById('namaSiswa').value;
       const kelasId = parseInt(document.getElementById('kelasSiswa').value);
       const siswaId = document.getElementById('siswaId').value;
@@ -1511,6 +1654,7 @@
       if (siswaId) {
         // Edit existing siswa
         const siswa = data.siswa.find(s => s.id == siswaId);
+        siswa.nis = nis;
         siswa.nama = nama;
         siswa.kelasId = kelasId;
         showNotification(`Data siswa ${nama} berhasil diperbarui!`);
@@ -1519,6 +1663,7 @@
         const newId = Math.max(...data.siswa.map(s => s.id), 0) + 1;
         data.siswa.push({
           id: newId,
+          nis,
           nama,
           kelasId
         });
@@ -1812,6 +1957,467 @@
 
       resultsDiv.classList.remove('hidden');
       showNotification(`Ditemukan ${uniqueStudents.size} siswa sesuai filter!`);
+    }
+
+    // Export Ranking functionality
+    function exportRankingExcel() {
+      const kelasFilter = document.getElementById('exportKelasSelect').value;
+      const sortType = document.getElementById('exportSortType').value;
+      const tahunAjaran = document.getElementById('exportTahunAjaran').value;
+      const judulLaporan = document.getElementById('exportJudulLaporan').value;
+      const tambahNIS = document.getElementById('exportTambahNIS').checked;
+
+      // Get selected nilai columns
+      const selectedKolom = [];
+      document.querySelectorAll('#exportNilaiCheckboxes input[type="checkbox"]:checked').forEach(checkbox => {
+        selectedKolom.push(checkbox.value);
+      });
+
+      if (selectedKolom.length === 0) {
+        showNotification('Pilih minimal satu jenis nilai!', 'error');
+        return;
+      }
+
+      // Get ranked students
+      let rankedStudents = getRankedStudents(kelasFilter);
+
+      // Sort based on selection
+      if (sortType === 'abjad') {
+        rankedStudents.sort((a, b) => a.nama.localeCompare(b.nama));
+      }
+
+      if (rankedStudents.length === 0) {
+        showNotification('Tidak ada data siswa untuk di-export!', 'error');
+        return;
+      }
+
+      // Create workbook
+      const wb = XLSX.utils.book_new();
+
+      // Prepare data
+      const sheetData = [];
+
+      // Title rows
+      const kelasName = kelasFilter ? data.kelas.find(k => k.id == kelasFilter).nama : 'Semua Kelas';
+      sheetData.push([judulLaporan]);
+      sheetData.push([`Kelas: ${kelasName}`]);
+      sheetData.push([`Tahun Ajaran: ${tahunAjaran}`]);
+      sheetData.push([`Semester: ${data.currentSemester === 'ganjil' ? 'Ganjil' : 'Genap'}`]);
+      sheetData.push([]); // Empty row
+
+      // Header row
+      const headers = [sortType === 'ranking' ? 'Peringkat' : 'No'];
+      if (tambahNIS) headers.push('NIS');
+      headers.push('Nama');
+      selectedKolom.forEach(kolom => headers.push(kolom));
+      headers.push('Rata-rata', 'Status');
+      sheetData.push(headers);
+
+      // Data rows
+      rankedStudents.forEach((student, index) => {
+        const siswa = data.siswa.find(s => s.id === student.siswaId);
+        const nilai = data.nilai.find(n => n.siswaId === student.siswaId && n.semester === data.currentSemester);
+
+        const row = [index + 1];
+        if (tambahNIS) row.push(siswa.nis || '-');
+        row.push(student.nama);
+
+        // Add selected nilai columns
+        selectedKolom.forEach(kolom => {
+          row.push(nilai && nilai[kolom] ? nilai[kolom] : 0);
+        });
+
+        row.push(parseFloat(student.average));
+        row.push(getGradeText(student.average));
+
+        sheetData.push(row);
+      });
+
+      // Create worksheet
+      const ws = XLSX.utils.aoa_to_sheet(sheetData);
+
+      // Merge title cells
+      ws['!merges'] = [{
+          s: {
+            r: 0,
+            c: 0
+          },
+          e: {
+            r: 0,
+            c: headers.length - 1
+          }
+        },
+        {
+          s: {
+            r: 1,
+            c: 0
+          },
+          e: {
+            r: 1,
+            c: headers.length - 1
+          }
+        },
+        {
+          s: {
+            r: 2,
+            c: 0
+          },
+          e: {
+            r: 2,
+            c: headers.length - 1
+          }
+        },
+        {
+          s: {
+            r: 3,
+            c: 0
+          },
+          e: {
+            r: 3,
+            c: headers.length - 1
+          }
+        }
+      ];
+
+      // Set column widths
+      const colWidths = [{
+        wch: 12
+      }]; // Peringkat
+      if (tambahNIS) colWidths.push({
+        wch: 12
+      }); // NIS
+      colWidths.push({
+        wch: 25
+      }); // Nama
+      selectedKolom.forEach(() => colWidths.push({
+        wch: 15
+      })); // Nilai columns
+      colWidths.push({
+        wch: 12
+      }); // Rata-rata
+      colWidths.push({
+        wch: 20
+      }); // Status
+      ws['!cols'] = colWidths;
+
+      // Style title rows (0-3)
+      for (let row = 0; row < 4; row++) {
+        const cellAddress = XLSX.utils.encode_cell({
+          r: row,
+          c: 0
+        });
+        if (ws[cellAddress]) {
+          ws[cellAddress].s = {
+            font: {
+              bold: true,
+              size: row === 0 ? 16 : 12
+            },
+            alignment: {
+              horizontal: "center",
+              vertical: "center"
+            }
+          };
+        }
+      }
+
+      // Style header row (row 5)
+      const headerRow = 5;
+      for (let col = 0; col < headers.length; col++) {
+        const cellAddress = XLSX.utils.encode_cell({
+          r: headerRow,
+          c: col
+        });
+        if (ws[cellAddress]) {
+          ws[cellAddress].s = {
+            fill: {
+              fgColor: {
+                rgb: "4F81BD"
+              }
+            },
+            font: {
+              color: {
+                rgb: "FFFFFF"
+              },
+              bold: true
+            },
+            alignment: {
+              horizontal: "center",
+              vertical: "center"
+            },
+            border: {
+              top: {
+                style: "thin"
+              },
+              bottom: {
+                style: "thin"
+              },
+              left: {
+                style: "thin"
+              },
+              right: {
+                style: "thin"
+              }
+            }
+          };
+        }
+      }
+
+      // Style data rows
+      for (let row = headerRow + 1; row < sheetData.length; row++) {
+        for (let col = 0; col < headers.length; col++) {
+          const cellAddress = XLSX.utils.encode_cell({
+            r: row,
+            c: col
+          });
+          if (!ws[cellAddress]) continue;
+
+          ws[cellAddress].s = {
+            alignment: {
+              horizontal: col <= 2 ? "left" : "center",
+              vertical: "center"
+            },
+            border: {
+              top: {
+                style: "thin",
+                color: {
+                  rgb: "CCCCCC"
+                }
+              },
+              bottom: {
+                style: "thin",
+                color: {
+                  rgb: "CCCCCC"
+                }
+              },
+              left: {
+                style: "thin",
+                color: {
+                  rgb: "CCCCCC"
+                }
+              },
+              right: {
+                style: "thin",
+                color: {
+                  rgb: "CCCCCC"
+                }
+              }
+            }
+          };
+
+          // Alternate row colors
+          if ((row - headerRow) % 2 === 0) {
+            ws[cellAddress].s.fill = {
+              fgColor: {
+                rgb: "F2F2F2"
+              }
+            };
+          }
+
+          // Color code for rata-rata column
+          if (col === headers.length - 2) {
+            const nilai = parseFloat(ws[cellAddress].v);
+            if (nilai >= 85) {
+              ws[cellAddress].s.fill = {
+                fgColor: {
+                  rgb: "C6EFCE"
+                }
+              };
+              ws[cellAddress].s.font = {
+                color: {
+                  rgb: "006100"
+                },
+                bold: true
+              };
+            } else if (nilai >= 75) {
+              ws[cellAddress].s.fill = {
+                fgColor: {
+                  rgb: "C6E0FF"
+                }
+              };
+              ws[cellAddress].s.font = {
+                color: {
+                  rgb: "0066CC"
+                },
+                bold: true
+              };
+            } else if (nilai >= 65) {
+              ws[cellAddress].s.fill = {
+                fgColor: {
+                  rgb: "FFEB9C"
+                }
+              };
+              ws[cellAddress].s.font = {
+                color: {
+                  rgb: "9C6500"
+                },
+                bold: true
+              };
+            } else {
+              ws[cellAddress].s.fill = {
+                fgColor: {
+                  rgb: "FFC7CE"
+                }
+              };
+              ws[cellAddress].s.font = {
+                color: {
+                  rgb: "9C0006"
+                },
+                bold: true
+              };
+            }
+          }
+
+          // Highlight top 3 only for ranking mode
+          if (sortType === 'ranking' && row <= headerRow + 3) {
+            if (col === 0) {
+              ws[cellAddress].s.font = {
+                bold: true,
+                size: 12
+              };
+              if (row === headerRow + 1) ws[cellAddress].s.fill = {
+                fgColor: {
+                  rgb: "FFD700"
+                }
+              }; // Gold
+              else if (row === headerRow + 2) ws[cellAddress].s.fill = {
+                fgColor: {
+                  rgb: "C0C0C0"
+                }
+              }; // Silver
+              else if (row === headerRow + 3) ws[cellAddress].s.fill = {
+                fgColor: {
+                  rgb: "CD7F32"
+                }
+              }; // Bronze
+            }
+          }
+        }
+      }
+
+      // Add worksheet to workbook
+      const sheetName = 'Ranking Siswa';
+      XLSX.utils.book_append_sheet(wb, ws, sheetName);
+
+      // Generate filename
+      const now = new Date();
+      const timestamp = now.toISOString().split('T')[0];
+      const sortSuffix = sortType === 'ranking' ? 'Ranking' : 'Abjad';
+      const filename = `${sortSuffix}_${kelasName.replace(/\s+/g, '_')}_${timestamp}.xlsx`;
+
+      // Write and download
+      XLSX.writeFile(wb, filename);
+
+      const sortText = sortType === 'ranking' ? 'berdasarkan ranking' : 'berdasarkan abjad';
+      showNotification(`📊 File "${filename}" berhasil diunduh ${sortText}!`);
+    }
+
+    function exportRankingCSV() {
+      const kelasFilter = document.getElementById('exportKelasSelect').value;
+      const sortType = document.getElementById('exportSortType').value;
+      const tahunAjaran = document.getElementById('exportTahunAjaran').value;
+      const judulLaporan = document.getElementById('exportJudulLaporan').value;
+      const tambahNIS = document.getElementById('exportTambahNIS').checked;
+
+      // Get selected nilai columns
+      const selectedKolom = [];
+      document.querySelectorAll('#exportNilaiCheckboxes input[type="checkbox"]:checked').forEach(checkbox => {
+        selectedKolom.push(checkbox.value);
+      });
+
+      if (selectedKolom.length === 0) {
+        showNotification('Pilih minimal satu jenis nilai!', 'error');
+        return;
+      }
+
+      // Get ranked students
+      let rankedStudents = getRankedStudents(kelasFilter);
+
+      // Sort based on selection
+      if (sortType === 'abjad') {
+        rankedStudents.sort((a, b) => a.nama.localeCompare(b.nama));
+      }
+
+      if (rankedStudents.length === 0) {
+        showNotification('Tidak ada data siswa untuk di-export!', 'error');
+        return;
+      }
+
+      // Build CSV content
+      const kelasName = kelasFilter ? data.kelas.find(k => k.id == kelasFilter).nama : 'Semua Kelas';
+      let csvContent = `${judulLaporan}\n`;
+      csvContent += `Kelas: ${kelasName}\n`;
+      csvContent += `Tahun Ajaran: ${tahunAjaran}\n`;
+      csvContent += `Semester: ${data.currentSemester === 'ganjil' ? 'Ganjil' : 'Genap'}\n\n`;
+
+      // Header
+      csvContent += sortType === 'ranking' ? 'Peringkat,' : 'No,';
+      if (tambahNIS) csvContent += 'NIS,';
+      csvContent += 'Nama,';
+      csvContent += selectedKolom.join(',') + ',';
+      csvContent += 'Rata-rata,Status\n';
+
+      // Data rows
+      rankedStudents.forEach((student, index) => {
+        const siswa = data.siswa.find(s => s.id === student.siswaId);
+        const nilai = data.nilai.find(n => n.siswaId === student.siswaId && n.semester === data.currentSemester);
+
+        let row = `${index + 1},`;
+        if (tambahNIS) row += `${siswa.nis || '-'},`;
+        row += `"${student.nama}",`;
+
+        selectedKolom.forEach(kolom => {
+          row += `${nilai && nilai[kolom] ? nilai[kolom] : 0},`;
+        });
+
+        row += `${student.average},`;
+        row += `"${getGradeText(student.average)}"\n`;
+
+        csvContent += row;
+      });
+
+      // Download
+      const blob = new Blob([csvContent], {
+        type: 'text/csv;charset=utf-8;'
+      });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      const timestamp = new Date().toISOString().split('T')[0];
+      const sortSuffix = sortType === 'ranking' ? 'Ranking' : 'Abjad';
+      a.download = `${sortSuffix}_${kelasName.replace(/\s+/g, '_')}_${timestamp}.csv`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+
+      const sortText = sortType === 'ranking' ? 'berdasarkan ranking' : 'berdasarkan abjad';
+      showNotification(`📋 File CSV berhasil diunduh ${sortText}!`);
+    }
+
+    function updateExportOptions() {
+      // Update kelas filter
+      const kelasSelect = document.getElementById('exportKelasSelect');
+      kelasSelect.innerHTML = '<option value="">📚 Semua Kelas</option>';
+      data.kelas.forEach(kelas => {
+        kelasSelect.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
+      });
+
+      // Update nilai checkboxes
+      const checkboxContainer = document.getElementById('exportNilaiCheckboxes');
+      checkboxContainer.innerHTML = '';
+
+      if (data.kolomNilai.length === 0) {
+        checkboxContainer.innerHTML = '<p class="text-sm text-gray-500 text-center py-4">Belum ada jenis nilai</p>';
+        return;
+      }
+
+      data.kolomNilai.forEach(kolom => {
+        const label = document.createElement('label');
+        label.className = 'flex items-center space-x-2 cursor-pointer hover:bg-white p-2 rounded-lg transition-colors';
+        label.innerHTML = `
+                    <input type="checkbox" value="${kolom.nama}" checked class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                    <span class="text-sm text-gray-700">${kolom.nama} <span class="text-xs text-gray-500">(${kolom.tanggal})</span></span>
+                `;
+        checkboxContainer.appendChild(label);
+      });
     }
 
     // Export functionality
@@ -2442,7 +3048,7 @@
         var b = a.contentDocument || a.contentWindow.document;
         if (b) {
           var d = b.createElement('script');
-          d.innerHTML = "window.__CF$cv$params={r:'98d6e20d10ed89aa',t:'MTc2MDI3NTEwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+          d.innerHTML = "window.__CF$cv$params={r:'9aaa17ca6324fd28',t:'MTc2NTE3NDE1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
           b.getElementsByTagName('head')[0].appendChild(d)
         }
       }
