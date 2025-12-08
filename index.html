@@ -513,7 +513,7 @@
           </div>
           <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0"><select id="kelasFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
               <option value="">📚 Semua Kelas</option>
-            </select> <button onclick="importSiswa()" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg"> 📥 Import Excel </button> <button onclick="openModal('siswaModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg"> ➕ Tambah Siswa </button>
+            </select> <button onclick="downloadTemplateImport()" class="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl font-medium shadow-lg transition-all"> 📄 Template Import </button> <button onclick="importSiswa()" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg"> 📥 Import Excel/CSV </button> <button onclick="openModal('siswaModal')" class="btn-primary text-white px-6 py-3 rounded-xl font-medium shadow-lg"> ➕ Tambah Siswa </button>
           </div>
         </div>
         <div class="table-container">
@@ -1691,8 +1691,202 @@
       }
     }
 
+    function downloadTemplateImport() {
+      // Create template data
+      const templateData = [
+        ['NIS', 'Nama', 'Kelas'],
+        ['2024001', 'Contoh Siswa 1', 'X IPA 1'],
+        ['2024002', 'Contoh Siswa 2', 'X IPA 2'],
+        ['2024003', 'Contoh Siswa 3', 'XI IPA 1']
+      ];
+
+      // Add available classes info
+      templateData.push([]);
+      templateData.push(['Kelas yang tersedia:']);
+      data.kelas.forEach(kelas => {
+        templateData.push([kelas.nama]);
+      });
+
+      // Create workbook
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet(templateData);
+
+      // Set column widths
+      ws['!cols'] = [{
+          wch: 12
+        }, // NIS
+        {
+          wch: 25
+        }, // Nama
+        {
+          wch: 15
+        } // Kelas
+      ];
+
+      // Style header row
+      ['A1', 'B1', 'C1'].forEach(cell => {
+        if (ws[cell]) {
+          ws[cell].s = {
+            fill: {
+              fgColor: {
+                rgb: "4F81BD"
+              }
+            },
+            font: {
+              color: {
+                rgb: "FFFFFF"
+              },
+              bold: true
+            },
+            alignment: {
+              horizontal: "center",
+              vertical: "center"
+            }
+          };
+        }
+      });
+
+      // Add worksheet to workbook
+      XLSX.utils.book_append_sheet(wb, ws, 'Template Import Siswa');
+
+      // Download
+      XLSX.writeFile(wb, 'Template_Import_Siswa.xlsx');
+
+      showNotification('📄 Template berhasil diunduh! Isi data sesuai format lalu import kembali.', 'success');
+    }
+
     function importSiswa() {
-      showNotification('Fitur import Excel akan segera tersedia. Untuk saat ini, gunakan tombol "Tambah Siswa".', 'info');
+      // Create file input element
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.xlsx,.xls,.csv';
+
+      input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+          try {
+            let workbook;
+            let worksheet;
+            let jsonData;
+
+            if (file.name.endsWith('.csv')) {
+              // Handle CSV file
+              const csvData = event.target.result;
+              workbook = XLSX.read(csvData, {
+                type: 'string'
+              });
+              worksheet = workbook.Sheets[workbook.SheetNames[0]];
+              jsonData = XLSX.utils.sheet_to_json(worksheet);
+            } else {
+              // Handle Excel file
+              const binaryData = event.target.result;
+              workbook = XLSX.read(binaryData, {
+                type: 'binary'
+              });
+              worksheet = workbook.Sheets[workbook.SheetNames[0]];
+              jsonData = XLSX.utils.sheet_to_json(worksheet);
+            }
+
+            if (jsonData.length === 0) {
+              showNotification('File tidak berisi data!', 'error');
+              return;
+            }
+
+            // Process imported data
+            let successCount = 0;
+            let errorCount = 0;
+            let duplicateCount = 0;
+            const errors = [];
+
+            jsonData.forEach((row, index) => {
+              // Support various column name formats
+              const nis = row['NIS'] || row['nis'] || row['Nis'] || row['NISN'] || row['nisn'] || '';
+              const nama = row['Nama'] || row['nama'] || row['Nama Siswa'] || row['nama siswa'] || row['NAMA'] || '';
+              const kelasNama = row['Kelas'] || row['kelas'] || row['KELAS'] || '';
+
+              // Validation
+              if (!nama || !kelasNama) {
+                errorCount++;
+                errors.push(`Baris ${index + 2}: Data Nama atau Kelas kosong`);
+                return;
+              }
+
+              // Find kelas by name
+              const kelas = data.kelas.find(k =>
+                k.nama.toLowerCase() === kelasNama.toLowerCase()
+              );
+
+              if (!kelas) {
+                errorCount++;
+                errors.push(`Baris ${index + 2}: Kelas "${kelasNama}" tidak ditemukan`);
+                return;
+              }
+
+              // Check for duplicate NIS
+              if (nis && data.siswa.find(s => s.nis === nis.toString())) {
+                duplicateCount++;
+                errors.push(`Baris ${index + 2}: NIS "${nis}" sudah ada`);
+                return;
+              }
+
+              // Add student
+              const newId = Math.max(...data.siswa.map(s => s.id), 0) + 1;
+              data.siswa.push({
+                id: newId,
+                nis: nis.toString(),
+                nama: nama.toString(),
+                kelasId: kelas.id
+              });
+
+              successCount++;
+            });
+
+            // Save data
+            dataManager.saveData();
+            renderSiswa();
+
+            // Show result notification
+            let message = `✅ Berhasil import ${successCount} siswa`;
+            if (duplicateCount > 0) {
+              message += `, ${duplicateCount} duplikat diabaikan`;
+            }
+            if (errorCount > 0) {
+              message += `, ${errorCount} error`;
+            }
+
+            showNotification(message, successCount > 0 ? 'success' : 'error');
+
+            // Show detailed errors if any
+            if (errors.length > 0 && errors.length <= 5) {
+              setTimeout(() => {
+                showNotification(errors.join(' | '), 'info');
+              }, 3500);
+            } else if (errors.length > 5) {
+              setTimeout(() => {
+                showNotification(`${errors.length} error ditemukan. Periksa format file Anda.`, 'info');
+              }, 3500);
+            }
+
+          } catch (error) {
+            console.error('Import error:', error);
+            showNotification('Gagal membaca file! Pastikan format file benar.', 'error');
+          }
+        };
+
+        // Read file based on type
+        if (file.name.endsWith('.csv')) {
+          reader.readAsText(file);
+        } else {
+          reader.readAsBinaryString(file);
+        }
+      };
+
+      // Trigger file selection
+      input.click();
     }
 
     // Nilai Management
@@ -3048,7 +3242,7 @@
         var b = a.contentDocument || a.contentWindow.document;
         if (b) {
           var d = b.createElement('script');
-          d.innerHTML = "window.__CF$cv$params={r:'9aaa17ca6324fd28',t:'MTc2NTE3NDE1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+          d.innerHTML = "window.__CF$cv$params={r:'9aaa33d5e318f92a',t:'MTc2NTE3NTMwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
           b.getElementsByTagName('head')[0].appendChild(d)
         }
       }
