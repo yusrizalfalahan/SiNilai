@@ -317,7 +317,7 @@
         <div><span class="font-medium">Data Kelas</span>
           <p class="text-xs text-gray-500">Kelola kelas sekolah</p>
         </div>
-      </a> <a href="#" onclick="showSection('siswa')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">👨‍🏫</span>
+      </a> <a href="#" onclick="showSection('siswa')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">👨‍🎓</span>
         <div><span class="font-medium">Data Siswa</span>
           <p class="text-xs text-gray-500">Kelola data siswa</p>
         </div>
@@ -337,7 +337,7 @@
         <div><span class="font-medium">Ekspor Data</span>
           <p class="text-xs text-gray-500">Unduh laporan nilai</p>
         </div>
-      </a> <a href="#" onclick="resetAllData()" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-red-50 text-gray-700 hover:text-red-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">♻️</span>
+      </a> <a href="#" onclick="resetAllData()" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-red-50 text-gray-700 hover:text-red-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">♻</span>
         <div><span class="font-medium">Reset Data</span>
           <p class="text-xs text-gray-500">Hapus semua data</p>
         </div>
@@ -399,7 +399,7 @@
                 0
               </div>
               <div class="text-sm text-gray-600">
-                👨‍🏫 Total Siswa
+                👨‍🎓 Total Siswa
               </div>
             </div>
             <div class="stats-card p-6 rounded-2xl text-center card-hover">
@@ -542,7 +542,7 @@
           </div>
           <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0"><select id="kelasNilaiFilter" class="px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 bg-white shadow-sm">
               <option value="">📚 Pilih Kelas</option>
-            </select> <button onclick="openModal('kolomModal')" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg"> ➕ Tambah Kolom </button>
+            </select> <button onclick="openModal('kolomModal')" class="btn-success text-white px-6 py-3 rounded-xl font-medium shadow-lg"> ���� Tambah Kolom </button>
           </div>
         </div>
         <div class="table-container overflow-x-auto">
@@ -1153,10 +1153,15 @@
               tanggal: kolom.tanggal
             });
 
-            if (nilaiKolom > 0) {
-              totalNilai += nilaiKolom;
-              jumlahKolom++;
-              nilaiTertinggi = Math.max(nilaiTertinggi, nilaiKolom);
+            // Hitung semua nilai termasuk nilai 0
+            totalNilai += nilaiKolom;
+            jumlahKolom++;
+            nilaiTertinggi = Math.max(nilaiTertinggi, nilaiKolom);
+
+            // Untuk nilai terendah, hitung dari semua nilai yang ada
+            if (jumlahKolom === 1) {
+              nilaiTerendah = nilaiKolom;
+            } else {
               nilaiTerendah = Math.min(nilaiTerendah, nilaiKolom);
             }
           }
@@ -1285,12 +1290,16 @@
 
       if (!nilai) return 0;
 
+      // Jika tidak ada kolom nilai sama sekali
+      if (data.kolomNilai.length === 0) return 0;
+
       let totalNilai = 0;
       let jumlahKolom = 0;
 
+      // Hitung SEMUA kolom nilai yang ada, termasuk nilai 0
       data.kolomNilai.forEach(kolom => {
-        if (nilai[kolom.nama] !== undefined && nilai[kolom.nama] > 0) {
-          totalNilai += parseFloat(nilai[kolom.nama]);
+        if (nilai[kolom.nama] !== undefined) {
+          totalNilai += parseFloat(nilai[kolom.nama]) || 0;
           jumlahKolom++;
         }
       });
@@ -1448,7 +1457,7 @@
         topStudents[2] || null // 3rd place (right on desktop)
       ];
 
-      const medals = isMobile ? ['🥇', '🥈', '🥉'] : ['🥈', '🥇', '🥉'];
+      const medals = isMobile ? ['🥇', '🥈', '🥉'] : ['🥈', '��', '��'];
       const heights = isMobile ? ['h-72', 'h-56', 'h-48'] : ['h-56', 'h-72', 'h-48'];
       const gradients = isMobile ? [
         'from-yellow-100 to-amber-200 border-yellow-400',
@@ -1522,9 +1531,9 @@
 
       data.nilai.forEach(nilai => {
         data.kolomNilai.forEach(kolom => {
-          if (nilai[kolom.nama] !== undefined && nilai[kolom.nama] > 0) {
+          if (nilai[kolom.nama] !== undefined) {
             totalNilaiCount++;
-            totalNilaiSum += parseFloat(nilai[kolom.nama]);
+            totalNilaiSum += parseFloat(nilai[kolom.nama]) || 0;
           }
         });
       });
@@ -2103,8 +2112,8 @@
 
         if (nilai) {
           data.kolomNilai.forEach(kolom => {
-            if (nilai[kolom.nama] !== undefined && nilai[kolom.nama] > 0) {
-              totalNilai += parseFloat(nilai[kolom.nama]);
+            if (nilai[kolom.nama] !== undefined) {
+              totalNilai += parseFloat(nilai[kolom.nama]) || 0;
               jumlahKolom++;
             }
           });
@@ -2666,12 +2675,10 @@
           let jumlahKolom = 0;
 
           data.kolomNilai.forEach(kolom => {
-            const nilaiKolom = nilai ? (nilai[kolom.nama] || 0) : 0;
+            const nilaiKolom = nilai ? (parseFloat(nilai[kolom.nama]) || 0) : 0;
             row.push(nilaiKolom);
-            if (nilaiKolom > 0) {
-              totalNilai += parseFloat(nilaiKolom);
-              jumlahKolom++;
-            }
+            totalNilai += nilaiKolom;
+            jumlahKolom++;
           });
 
           const nilaiRataRata = jumlahKolom > 0 ? (totalNilai / jumlahKolom) : 0;
@@ -2892,13 +2899,13 @@
 
         siswaKelas.forEach(siswa => {
           const nilai = data.nilai.find(n => n.siswaId === siswa.id && n.semester === data.currentSemester);
-          if (nilai) {
+          if (nilai && data.kolomNilai.length > 0) {
             let totalNilaiSiswa = 0;
             let jumlahKolomSiswa = 0;
 
             data.kolomNilai.forEach(kolom => {
-              if (nilai[kolom.nama] !== undefined && nilai[kolom.nama] > 0) {
-                totalNilaiSiswa += parseFloat(nilai[kolom.nama]);
+              if (nilai[kolom.nama] !== undefined) {
+                totalNilaiSiswa += parseFloat(nilai[kolom.nama]) || 0;
                 jumlahKolomSiswa++;
               }
             });
@@ -2907,8 +2914,14 @@
               const rataRataSiswa = totalNilaiSiswa / jumlahKolomSiswa;
               totalNilaiKelas += rataRataSiswa;
               jumlahSiswa++;
-              nilaiTertinggi = Math.max(nilaiTertinggi, rataRataSiswa);
-              nilaiTerendah = Math.min(nilaiTerendah, rataRataSiswa);
+
+              if (jumlahSiswa === 1) {
+                nilaiTertinggi = rataRataSiswa;
+                nilaiTerendah = rataRataSiswa;
+              } else {
+                nilaiTertinggi = Math.max(nilaiTertinggi, rataRataSiswa);
+                nilaiTerendah = Math.min(nilaiTerendah, rataRataSiswa);
+              }
             }
           }
         });
@@ -2917,7 +2930,7 @@
         let status = '';
         if (rataRataKelas >= 85) status = '🏆 Sangat Baik';
         else if (rataRataKelas >= 75) status = '👍 Baik';
-        else if (rataRataKelas >= 65) status = '⚠️ Cukup';
+        else if (rataRataKelas >= 65) status = '��️ Cukup';
         else status = '📚 Perlu Bimbingan';
 
         if (jumlahSiswa === 0) {
@@ -3188,9 +3201,9 @@
 
       data.nilai.forEach(nilai => {
         data.kolomNilai.forEach(kolom => {
-          if (nilai[kolom.nama] !== undefined && nilai[kolom.nama] > 0) {
+          if (nilai[kolom.nama] !== undefined) {
             totalNilaiCount++;
-            totalNilaiSum += parseFloat(nilai[kolom.nama]);
+            totalNilaiSum += parseFloat(nilai[kolom.nama]) || 0;
           }
         });
       });
@@ -3264,7 +3277,7 @@
         var b = a.contentDocument || a.contentWindow.document;
         if (b) {
           var d = b.createElement('script');
-          d.innerHTML = "window.__CF$cv$params={r:'9aabf7f62091273f',t:'MTc2NTE5MzgyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+          d.innerHTML = "window.__CF$cv$params={r:'9aaccf5c72b4f8e4',t:'MTc2NTIwMjY0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
           b.getElementsByTagName('head')[0].appendChild(d)
         }
       }
