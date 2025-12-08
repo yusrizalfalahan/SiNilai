@@ -333,7 +333,7 @@
         <div><span class="font-medium">Filter Nilai</span>
           <p class="text-xs text-gray-500">Cari dan filter nilai</p>
         </div>
-      </a> <a href="#" onclick="showSection('ekspor')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">📤</span>
+      </a> <a href="#" onclick="showSection('ekspor')" class="menu-item flex items-center space-x-4 p-4 rounded-xl hover:bg-blue-50 text-gray-700 hover:text-blue-600 group"> <span class="text-2xl group-hover:scale-110 transition-transform">📥</span>
         <div><span class="font-medium">Ekspor Data</span>
           <p class="text-xs text-gray-500">Unduh laporan nilai</p>
         </div>
@@ -436,7 +436,7 @@
               </select>
             </div>
           </div><!-- Top 3 Podium -->
-          <div id="podiumContainer" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <div id="podiumContainer" class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
             <!-- Podium will be rendered here -->
           </div>
         </div><!-- Quick Actions -->
@@ -573,7 +573,7 @@
             </div>
             <div><label class="block text-sm font-medium text-gray-700 mb-2">👤 Nama Siswa</label> <input type="text" id="filterNamaSiswa" placeholder="Cari nama siswa..." class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
             </div>
-            <div><label class="block text-sm font-medium text-gray-700 mb-2">🏫 Kelas</label> <select id="filterKelas" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
+            <div><label class="block text-sm font-medium text-gray-700 mb-2">��� Kelas</label> <select id="filterKelas" class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white">
                 <option value="">Semua Kelas</option>
               </select>
             </div>
@@ -738,10 +738,12 @@
           </div>
           <div><label class="block text-sm font-medium text-gray-700 mb-2">🎓 Tingkat</label> <select id="tingkatKelas" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" onchange="updateFormProgress('kelas')">
               <option value="">Pilih Tingkat</option>
-              <option value="X">Kelas X</option>
-              <option value="XI">Kelas XI</option>
-              <option value="XII">Kelas XII</option>
+              <option value="VII">Kelas VII</option>
+              <option value="VIII">Kelas VIII</option>
+              <option value="IX">Kelas IX</option>
             </select>
+          </div>
+          <div><label class="block text-sm font-medium text-gray-700 mb-2">👨‍🏫 Nama Wali Kelas</label> <input type="text" id="waliKelas" placeholder="Contoh: Budi Santoso, S.Pd" required class="input-field w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500" oninput="updateFormProgress('kelas')">
           </div>
         </div>
         <div class="flex space-x-4 mt-8"><button type="button" onclick="closeModal('kelasModal')" class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"> Batal </button> <button type="submit" class="btn-primary flex-1 text-white px-6 py-3 rounded-xl font-medium"> ✨ Simpan Kelas </button>
@@ -827,18 +829,21 @@
         this.data = {
           kelas: [{
               id: 1,
-              nama: 'X IPA 1',
-              tingkat: 'X'
+              nama: 'VII A',
+              tingkat: 'VII',
+              waliKelas: 'Ahmad Budiman, S.Pd'
             },
             {
               id: 2,
-              nama: 'X IPA 2',
-              tingkat: 'X'
+              nama: 'VII B',
+              tingkat: 'VII',
+              waliKelas: 'Siti Rahayu, S.Pd'
             },
             {
               id: 3,
-              nama: 'XI IPA 1',
-              tingkat: 'XI'
+              nama: 'VIII A',
+              tingkat: 'VIII',
+              waliKelas: 'Drs. Bambang Susilo'
             }
           ],
           siswa: [{
@@ -1029,9 +1034,10 @@
       let filledFields = 0;
 
       if (formType === 'kelas') {
-        totalFields = 2;
+        totalFields = 3;
         if (document.getElementById('namaKelas').value) filledFields++;
         if (document.getElementById('tingkatKelas').value) filledFields++;
+        if (document.getElementById('waliKelas').value) filledFields++;
       } else if (formType === 'siswa') {
         totalFields = 3;
         if (document.getElementById('nisSiswa').value) filledFields++;
@@ -1093,6 +1099,7 @@
         document.getElementById('kelasId').value = editData.id;
         document.getElementById('namaKelas').value = editData.nama;
         document.getElementById('tingkatKelas').value = editData.tingkat;
+        document.getElementById('waliKelas').value = editData.waliKelas || '';
         updateFormProgress('kelas');
       } else if (modalId === 'kelasModal') {
         document.getElementById('kelasModalTitle').textContent = 'Tambah Kelas Baru';
@@ -1427,21 +1434,32 @@
         return;
       }
 
-      // Arrange podium: 2nd, 1st, 3rd
-      const podiumOrder = [
-        topStudents[1] || null, // 2nd place (left)
-        topStudents[0] || null, // 1st place (center)
-        topStudents[2] || null // 3rd place (right)
+      // For mobile (single column): show 1st, 2nd, 3rd in order
+      // For desktop (3 columns): arrange as 2nd, 1st, 3rd for podium effect
+      const isMobile = window.innerWidth < 640; // sm breakpoint
+
+      const podiumOrder = isMobile ? [
+        topStudents[0] || null, // 1st place (top on mobile)
+        topStudents[1] || null, // 2nd place (middle on mobile)
+        topStudents[2] || null // 3rd place (bottom on mobile)
+      ] : [
+        topStudents[1] || null, // 2nd place (left on desktop)
+        topStudents[0] || null, // 1st place (center on desktop)
+        topStudents[2] || null // 3rd place (right on desktop)
       ];
 
-      const medals = ['🥈', '🥇', '🥉'];
-      const heights = ['h-56', 'h-72', 'h-48'];
-      const gradients = [
+      const medals = isMobile ? ['🥇', '🥈', '🥉'] : ['🥈', '🥇', '🥉'];
+      const heights = isMobile ? ['h-72', 'h-56', 'h-48'] : ['h-56', 'h-72', 'h-48'];
+      const gradients = isMobile ? [
+        'from-yellow-100 to-amber-200 border-yellow-400',
+        'from-gray-100 to-gray-200 border-gray-300',
+        'from-orange-100 to-orange-200 border-orange-300'
+      ] : [
         'from-gray-100 to-gray-200 border-gray-300',
         'from-yellow-100 to-amber-200 border-yellow-400',
         'from-orange-100 to-orange-200 border-orange-300'
       ];
-      const positions = ['2', '1', '3'];
+      const positions = isMobile ? ['1', '2', '3'] : ['2', '1', '3'];
 
       podiumOrder.forEach((student, index) => {
         if (!student) {
@@ -1529,6 +1547,7 @@
                         <div>
                             <h3 class="text-xl font-bold text-blue-900 mb-2">${kelas.nama}</h3>
                             <p class="text-sm text-blue-700">🎓 Tingkat: ${kelas.tingkat}</p>
+                            <p class="text-sm text-blue-700">👨‍🏫 Wali Kelas: ${kelas.waliKelas || '-'}</p>
                             <p class="text-sm text-blue-700">👥 ${siswaCount} siswa</p>
                         </div>
                         <div class="flex space-x-2">
@@ -1555,6 +1574,7 @@
       event.preventDefault();
       const nama = document.getElementById('namaKelas').value;
       const tingkat = document.getElementById('tingkatKelas').value;
+      const waliKelas = document.getElementById('waliKelas').value;
       const kelasId = document.getElementById('kelasId').value;
 
       if (kelasId) {
@@ -1562,6 +1582,7 @@
         const kelas = data.kelas.find(k => k.id == kelasId);
         kelas.nama = nama;
         kelas.tingkat = tingkat;
+        kelas.waliKelas = waliKelas;
         showNotification(`Kelas ${nama} berhasil diperbarui!`);
       } else {
         // Add new kelas
@@ -1569,7 +1590,8 @@
         data.kelas.push({
           id: newId,
           nama,
-          tingkat
+          tingkat,
+          waliKelas
         });
         showNotification(`Kelas ${nama} berhasil ditambahkan!`);
       }
@@ -1695,9 +1717,9 @@
       // Create template data
       const templateData = [
         ['NIS', 'Nama', 'Kelas'],
-        ['2024001', 'Contoh Siswa 1', 'X IPA 1'],
-        ['2024002', 'Contoh Siswa 2', 'X IPA 2'],
-        ['2024003', 'Contoh Siswa 3', 'XI IPA 1']
+        ['2024001', 'Contoh Siswa 1', 'VII A'],
+        ['2024002', 'Contoh Siswa 2', 'VII B'],
+        ['2024003', 'Contoh Siswa 3', 'VIII A']
       ];
 
       // Add available classes info
@@ -1850,7 +1872,7 @@
             renderSiswa();
 
             // Show result notification
-            let message = `✅ Berhasil import ${successCount} siswa`;
+            let message = `�� Berhasil import ${successCount} siswa`;
             if (duplicateCount > 0) {
               message += `, ${duplicateCount} duplikat diabaikan`;
             }
@@ -3242,7 +3264,7 @@
         var b = a.contentDocument || a.contentWindow.document;
         if (b) {
           var d = b.createElement('script');
-          d.innerHTML = "window.__CF$cv$params={r:'9aaa33d5e318f92a',t:'MTc2NTE3NTMwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+          d.innerHTML = "window.__CF$cv$params={r:'9aabf7f62091273f',t:'MTc2NTE5MzgyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
           b.getElementsByTagName('head')[0].appendChild(d)
         }
       }
