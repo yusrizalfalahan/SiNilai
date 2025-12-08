@@ -1747,7 +1747,7 @@
     function updateRankingKelasFilter() {
       const filter = document.getElementById('rankingKelasFilter');
       const currentValue = filter.value;
-      filter.innerHTML = '<option value="">��� Semua Kelas</option>';
+      filter.innerHTML = '<option value="">📚 Semua Kelas</option>';
       data.kelas.forEach(kelas => {
         filter.innerHTML += `<option value="${kelas.id}">${kelas.nama}</option>`;
       });
@@ -2398,16 +2398,16 @@
 
     // Grade classification helpers
     function getGradeClass(nilai) {
-      if (nilai >= 85) return 'grade-excellent';
-      if (nilai >= 75) return 'grade-good';
-      if (nilai >= 65) return 'grade-fair';
+      if (nilai >= 90) return 'grade-excellent';
+      if (nilai >= 80) return 'grade-good';
+      if (nilai >= 75) return 'grade-fair';
       return 'grade-poor';
     }
 
     function getGradeText(nilai) {
-      if (nilai >= 85) return '⭐ Sangat Baik';
-      if (nilai >= 75) return '👍 Baik';
-      if (nilai >= 65) return '���� Cukup';
+      if (nilai >= 90) return '⭐ Sangat Baik';
+      if (nilai >= 80) return '👍 Baik';
+      if (nilai >= 75) return '⚠️ Cukup';
       return '📉 Perlu Perbaikan';
     }
 
